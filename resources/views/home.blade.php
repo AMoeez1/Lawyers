@@ -8,6 +8,6 @@
 </head>
 <body>
     @include('components.nav')
-    <p>{{$user->name}}</p>
+    {{-- <p>{{$user->name}}</p> --}}
 </body>
 </html>

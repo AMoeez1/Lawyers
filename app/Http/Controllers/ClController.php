@@ -26,8 +26,8 @@ class ClController extends Controller
         ]);
 
         // $token = $user->createToken('MyToken')->plainTextToken;
-        return redirect()->route('home', ['user' => $user]);
-        // return view('home', ['user' => $user]);
+        // return redirect()->route('home', ['user' => $user]);
+        return view('home', ['user' => $user]);
     }
     public function loginCl(Request $request){
         $credentials = $request->only('email', 'password');
