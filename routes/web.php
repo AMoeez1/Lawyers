@@ -1,26 +1,27 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Auth\ClientController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
+    Route::get('login', [ClientController::class, 'showLogin'])->name('login.form');
+    Route::post('login', [ClientController::class, 'login'])->name('login');
 
-Route::get('/', [AuthController::class,'index']);
+    Route::get('register', [ClientController::class, 'showRegister'])->name('register.form');
+    Route::post('register', [ClientController::class, 'register'])->name('register');
 
-Route::get('/', function () {
-    return view('home');
 });
-Route::get('/register/client', function () {
-    return view('Auth/register_cl');
-});
-Route::get('/register/lawyer', function () {
-    return view('Auth/register_law');
-});
-// Route::get('/login/lawyer', function () {
-//     return view('Auth/login_law');
+    
+Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
+//     Route::get('login');
+//     Route::post('login');
+
+//     Route::get('register');
+//     Route::post('register');
+
+//     Route::middleware('auth:lawyer', function () {
+//         Route::get('/');
+//     });
 // });
-Route::get('/login/client', function () {
-    return view('Auth/loginCl');
-});
