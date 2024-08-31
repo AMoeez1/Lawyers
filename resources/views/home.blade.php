@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    @include('components.nav')
+    @include('components.nav',['client' => $client])
     <!-- Hero Section -->
     <section class="hero-bg bg-black h-screen flex items-center justify-center text-center text-white">
         {{-- <img src="{{asset('lawyers.jpg')}}" alt=""> --}}

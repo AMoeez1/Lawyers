@@ -14,6 +14,7 @@ Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
 });
     
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 // Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
 //     Route::get('login');
 //     Route::post('login');

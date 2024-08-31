@@ -14,6 +14,6 @@
         <button type="submit"
             class="w-full bg-gray-100 hover:bg-gray-200 py-2 rounded-md transition duration-300">Login</button>
 
-        <p class="mt-4">Already have an account? <a class="underline" href="/register/client">Register</a></p>
+        <p class="mt-4">Already have an account? <a class="underline" href="/client/register">Register</a></p>
     </form>
 @endsection

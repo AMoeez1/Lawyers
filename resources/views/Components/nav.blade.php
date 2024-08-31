@@ -61,7 +61,11 @@
                     {{-- <a href="#how-it-works" class="hover:text-gray-400">How It Works</a> --}}
                     <a href="/" class="hover:text-gray-400">Home</a>
                     <a href="#featured-lawyers" class="hover:text-gray-400">Lawyers</a>
-                    <a href="/register/client" class="hover:text-gray-400">Regsiter</a>
+                    @if($client)
+                    <a href="/profile" class="hover:text-gray-400">Profile</a>
+                    @else
+                    <a href="/client/register" class="hover:text-gray-400">Regsiter</a>
+                    @endif
                     <a href="#contact" class="hover:text-gray-400">Contact Us</a>
                 </div>
 
@@ -90,6 +94,6 @@
    </body>
 
    <script>
-    
+        
    </script>
 </html>
