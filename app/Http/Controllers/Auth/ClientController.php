@@ -40,12 +40,13 @@ class ClientController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        if(Auth::guard('client')->attempt($credentials)){
+        
+        if (Auth::guard('client')->attempt($credentials)) {
             return redirect()->route('home');
-        };
+        }
 
         return back()->withErrors([
-            'email' => 'Invalid user credentials',
+            'credentials' => 'Invalid user credentials',
         ]);
     }
 }
