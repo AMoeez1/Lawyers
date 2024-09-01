@@ -14,7 +14,7 @@
   <body>
     
 
-<div class="bg-background text-primary-foreground min-h-screen">
+<div class="bg-s text-primary-foreground min-h-screen">
   <header class="bg-primary py-4">
     <div class="container mx-auto flex items-center justify-between">
       <h1 class="text-2xl font-bold">User Profile</h1>
@@ -26,20 +26,20 @@
       <div class="flex items-center">
         <img src="https://placehold.co/150x150" alt="User Avatar" class="w-20 h-20 rounded-full" />
         <div class="ml-4">
-          <h2 class="text-xl font-bold">John Doe</h2>
-          <p class="text-secondary">Web Developer</p>
+          <h2 class="text-xl font-bold">{{$client->name}}</h2>
+          <p class="text-secondary"></p>
         </div>
       </div>
       <div class="mt-4">
         <h3 class="text-lg font-semibold">About Me</h3>
-        <p class="mt-2">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis libero in dui consectetur, nec ultricies libero ultricies.</p>
+        <p class="mt-2"></p>
       </div>
       <div class="mt-4">
         <h3 class="text-lg font-semibold">Contact Information</h3>
         <ul class="mt-2">
-          <li>Email: john.doe@example.com</li>
+          <li>Email: {{$client->email}}</li>
           <li>Phone: +1 234 567 890</li>
-          <li>Location: City, Country</li>
+          <li></li>
         </ul>
       </div>
     </div>

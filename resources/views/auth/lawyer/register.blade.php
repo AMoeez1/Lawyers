@@ -1,16 +1,17 @@
  @extends('layouts.auth')
 
  @section('content')
-     <form class="bg-card p-8 rounded-lg bg-white shadow-lg w-full max-w-md">
+     <form method="POST" action="{{ route('lawyer.register')}}" class="bg-card p-8 rounded-lg bg-white shadow-lg w-full max-w-md">
+        @csrf
          <label for="name" class="block mb-2">Full Name</label>
-         <input type="text" id="name" placeholder="Enter your full name"
+         <input type="text" name="name" id="name" placeholder="Enter your full name"
              class="w-full px-3 py-2 mb-4 placeholder-input text-input border border-border rounded-md focus:outline-none focus:ring ring-primary" />
          <label for="email" class="block mb-2">Email Address</label>
-         <input type="email" id="email" placeholder="Enter your email address"
+         <input type="email" id="email" name="email" placeholder="Enter your email address"
              class="w-full px-3 py-2 mb-4 placeholder-input text-input border border-border rounded-md focus:outline-none focus:ring ring-primary" />
          <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select an
              option</label>
-         <select id="countries"
+         <select id="countries" name="degree"
              class="bg-gray-50 mb-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
              <option selected>Choose a Degree</option>
              <option value="LLB">Bachelors of Law (LLB)</option>
@@ -22,11 +23,14 @@
          </select>
 
          <label for="speciality" class="block mb-2">Speciality / Proficiency</label>
-         <input type="text" id="speciality" placeholder="Enter your Speciality"
+         <input type="text" name="proficiency" id="speciality" placeholder="Enter your Speciality"
              class="w-full px-3 py-2 mb-4 placeholder-input text-input border border-border rounded-md focus:outline-none focus:ring ring-primary" />
 
+         <label for="CNIC" class="block mb-2">CNIC number</label>
+         <input type="text" name="CNIC" id="CNIC" placeholder="Enter your CNIC number"
+             class="w-full px-3 py-2 mb-4 placeholder-input text-input border border-border rounded-md focus:outline-none focus:ring ring-primary" />
          <label for="password" class="block mb-2">Password</label>
-         <input type="password" id="password" placeholder="Enter your password"
+         <input type="password" name="password" id="password" placeholder="Enter your password"
              class="w-full px-3 py-2 mb-6 placeholder-input text-input border border-border rounded-md focus:outline-none focus:ring ring-primary" />
 
          <button type="submit"

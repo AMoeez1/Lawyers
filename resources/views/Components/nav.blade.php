@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
     {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.2.7/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
@@ -61,16 +62,25 @@
                     {{-- <a href="#how-it-works" class="hover:text-gray-400">How It Works</a> --}}
                     <a href="/" class="hover:text-gray-400">Home</a>
                     <a href="#featured-lawyers" class="hover:text-gray-400">Lawyers</a>
-                    @if($client)
-                    <a href="/profile" class="hover:text-gray-400">Profile</a>
+                    @if ($client)
+                        <a href="/profile" class="hover:text-gray-400">Profile</a>
                     @else
-                    <a href="/client/register" class="hover:text-gray-400">Regsiter</a>
+                        <a href="/client/register" class="hover:text-gray-400">Regsiter</a>
                     @endif
                     <a href="#contact" class="hover:text-gray-400">Contact Us</a>
+                    @if ($client)
+                        <form method="post" action="{{ route('client.logout') }}">
+                            @csrf
+                            <button class="flex items-center text- gap-2">
+                                <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
+                                Logout
+                            </button>
+                        </form>
+                    @endif
                 </div>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden flex items-center" >
+                <button id="mobile-menu-button" class="md:hidden flex items-center">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                         xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -84,16 +94,27 @@
         <div id="mobile-menu" class="md:hidden absolute top-16 left-0 w-full bg-gray-900 text-white hidden">
             <div class="px-4 py-2">
                 {{-- <a href="#how-it-works" class="block py-2 px-4 hover:bg-gray-700">How It Works</a> --}}
-                <a href="#practice-areas" class="block py-2 px-4 hover:bg-gray-700">Home</a>
-                <a href="#featured-lawyers" class="block py-2 px-4 hover:bg-gray-700">Lawyers</a>
-                <a href="#testimonials" class="block py-2 px-4 hover:bg-gray-700">Testimonials</a>
-                <a href="#contact" class="block py-2 px-4 hover:bg-gray-700">Contact Us</a>
+                <a href="/" class="block py-2 px-4 hover:bg-gray-700">Home</a>
+                @if ($client)
+                    <a href="/profile" class="hover:text-gray-400">Profile</a>
+                @else
+                    <a href="/client/register" class="hover:text-gray-400">Regsiter</a>
+                @endif
+                <a href="#contact" class="hover:text-gray-400">Contact Us</a>
+                @if ($client)
+                    <form method="post" action="{{ route('client.logout') }}">
+                        @csrf
+                        <button class="flex items-center text- gap-2">
+                            <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
+                            Logout
+                        </button>
+                    </form>
+                @endif
             </div>
         </div>
     </nav>
-   </body>
+</body>
 
-   <script>
-        
-   </script>
+<script></script>
+
 </html>

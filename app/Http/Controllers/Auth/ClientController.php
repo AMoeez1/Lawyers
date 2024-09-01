@@ -49,4 +49,9 @@ class ClientController extends Controller
             'credentials' => 'Invalid user credentials',
         ]);
     }
+
+    public function logout(){
+        Auth::guard('client')->logout();
+        return redirect()->route('home');
+    }
 }

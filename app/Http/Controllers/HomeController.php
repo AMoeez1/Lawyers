@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -10,7 +11,8 @@ class HomeController extends Controller
     public function index()
     {
         $client = Auth::guard('client')->user();
-        return view('home', ['client' => $client]);
+        $allUser = Client::all();
+        return view('home', ['client' => $client, 'AllUsers' => $allUser]);
     }
     public function profile()
     {
