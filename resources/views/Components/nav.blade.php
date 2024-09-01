@@ -54,7 +54,7 @@
             <div class="flex items-center justify-between py-4">
                 <!-- Logo -->
                 <div class="text-2xl font-bold">
-                    <a href="#" class="text-white hover:text-gray-300">LawyerConnect</a>
+                    <a href="/" class="text-white hover:text-gray-300">LawyerConnect</a>
                 </div>
 
                 <!-- Desktop Menu -->

@@ -22,6 +22,7 @@ class LawyerController extends Controller
             'CNIC' => 'required|max:15|min:12',
             'proficiency' => 'required',
             'degree' => 'required',
+            'about' => 'required|max:150'
         ]);
         $user = User::create([
             'name' => $request->name,
@@ -29,7 +30,8 @@ class LawyerController extends Controller
             'password' => bcrypt($request->password),
             'CNIC' => $request->CNIC,
             'proficiency' => $request->proficiency,
-            'degree' => $request->degree    
+            'degree' => $request->degree,
+            'about' => 'about'    
         ]);
         return redirect()->route('home', ['user' => $user]);
     }

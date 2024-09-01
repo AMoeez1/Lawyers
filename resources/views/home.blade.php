@@ -90,19 +90,21 @@
     <section class="py-12 bg-gray-50">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-8">Featured Lawyers</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid grid-cols-12 gap-8">
+                @foreach($AllUsers as $user)
                 <!-- Repeat for each featured lawyer -->
-                <div class="bg-white p-6 rounded-lg shadow-lg text-center">
-                    <img src="lawyer-photo.jpg" alt="Lawyer" class="w-24 h-24 rounded-full mx-auto mb-4">
-                    <h3 class="text-xl font-semibold mb-2">John Smith, Esq.</h3>
-                    <p class="text-gray-700 mb-4">Criminal Defense</p>
-                    <p>"I provide aggressive defense and fight for your rights."</p>
+                <div class="col-span-4 bg-white p-6 rounded-lg shadow-lg text-center">
+                    {{-- <img src="lawyer-photo.jpg" alt="Lawyer" class="w-24 h-24 rounded-full mx-auto mb-4"> --}}
+                    <h3 class="text-xl font-semibold mb-2">{{$user->name}}</h3>
+                    <p class="text-gray-700 mb-4">{{$user->proficiency}}</p>
+                    <p>"{{$user->about}}"</p>
                     <a href="#book" class="text-blue-500 hover:underline mt-4 block">View Profile</a>
                     <a href="#book"
                         class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg mt-2 inline-block">Book
                         a Consultation</a>
                 </div>
                 <!-- Add more featured lawyers similarly -->
+                @endforeach
             </div>
         </div>
     </section>

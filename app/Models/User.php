@@ -22,7 +22,8 @@ class User extends Authenticatable
         'password',
         'degree',
         'proficiency',
-        'CNIC'
+        'CNIC',
+        'about'
     ];
 
     /**
