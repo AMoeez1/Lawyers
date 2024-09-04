@@ -11,44 +11,6 @@
 </head>
 
 <body>
-    {{-- <div class="grid grid-cols-12">
-        <div class="col-span-3 h-screen bg-gray-100 hidden lg:block">
-            <ul class="flex flex-col">
-                <li class="nav-item">
-                    <a to='/home' class="nav-link flex justify-center">
-                        <img src="{{ asset('lawyers_title.png') }}" width="80px" />
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link flex items-center py-2 mx-4 px-4 hover:bg-gray-200">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link flex items-center py-3 mx-4 px-4 hover:bg-gray-200">Lawyers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link flex items-center py-3 mx-4 px-4 hover:bg-gray-200">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link flex items-center py-3 mx-4 px-4 hover:bg-gray-200">Articles</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link flex items-center py-3 mx-4 px-4 hover:bg-gray-200">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link flex items-center py-3 mx-4 px-4 hover:bg-gray-200">Contact</a>
-                </li>
-            </ul>
-            <ul class="mt-14">
-                <li class="nav-item">
-                    <a class="nav-link flex items-center py-3 mx-4 px-4 hover:bg-gray-200">Register As Client</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link flex items-center py-3 mx-4 px-4 hover:bg-gray-200">Register As a Lawyer / Barristor</a>
-                </li>
-            </ul>
-        </div>
-
-    </div> --}}
     <nav class="bg-gray-900 text-white">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between py-4">
@@ -62,14 +24,14 @@
                     {{-- <a href="#how-it-works" class="hover:text-gray-400">How It Works</a> --}}
                     <a href="/" class="hover:text-gray-400">Home</a>
                     <a href="#featured-lawyers" class="hover:text-gray-400">Lawyers</a>
-                    @if ($client)
+                    @if (auth()->guard('client')->user() || auth()->user())
                         <a href="/profile" class="hover:text-gray-400">Profile</a>
                     @else
                         <a href="/client/register" class="hover:text-gray-400">Regsiter</a>
                     @endif
                     <a href="#contact" class="hover:text-gray-400">Contact Us</a>
-                    @if ($client)
-                        <form method="post" action="{{ route('client.logout') }}">
+                    @if (auth()->guard('client')->user() || auth()->user())
+                        <form method="post" action="{{ auth()->guard('client')->user() ? route('client.logout') :  route('lawyer.logout')}}">
                             @csrf
                             <button class="flex items-center text- gap-2">
                                 <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
@@ -95,14 +57,14 @@
             <div class="px-4 py-2">
                 {{-- <a href="#how-it-works" class="block py-2 px-4 hover:bg-gray-700">How It Works</a> --}}
                 <a href="/" class="block py-2 px-4 hover:bg-gray-700">Home</a>
-                @if ($client)
+                @if (auth()->guard('client')->user() || auth()->user())
                     <a href="/profile" class="hover:text-gray-400">Profile</a>
                 @else
                     <a href="/client/register" class="hover:text-gray-400">Regsiter</a>
                 @endif
                 <a href="#contact" class="hover:text-gray-400">Contact Us</a>
-                @if ($client)
-                    <form method="post" action="{{ route('client.logout') }}">
+                @if (auth()->guard('client')->user() || auth()->user())
+                    <form method="post" action="{{ auth()->guard('client')->user() ? route('client.logout') : route('lawyer.logout') }}">
                         @csrf
                         <button class="flex items-center text- gap-2">
                             <i class="fa fa-circle-o-notch" aria-hidden="true"></i>

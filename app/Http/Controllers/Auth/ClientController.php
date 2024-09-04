@@ -9,7 +9,13 @@ class ClientController extends Controller
 {
     public function showRegister()
     {
-        return view('auth.client.register');
+        $user = auth()->user();
+        $client = Auth::guard('client')->user();
+        if (!$user && !$client) {
+            return view('auth.client.register');
+        } else{
+            return redirect()->route('home');
+        }
     }
 
 
@@ -34,7 +40,13 @@ class ClientController extends Controller
 
     public function showLogin()
     {
-        return view('auth.client.login');
+        $user = auth()->user();
+        $client = Auth::guard('client')->user();
+        if (!$user && !$client) {
+            return view('auth.client.login');
+        } else{
+            return redirect()->route('home');
+        }
     }
 
     public function login(Request $request)

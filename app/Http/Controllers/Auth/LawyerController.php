@@ -9,7 +9,13 @@ class LawyerController extends Controller
 {
     public function showRegister()
     {
-        return view('auth.lawyer.register');
+        $user = auth()->user();
+        $client = Auth::guard('client')->user();
+        if (!$user && !$client) {
+            return view('auth.lawyer.register');
+        } else{
+            return redirect()->route('home');
+        }
     }
 
 
@@ -31,14 +37,20 @@ class LawyerController extends Controller
             'CNIC' => $request->CNIC,
             'proficiency' => $request->proficiency,
             'degree' => $request->degree,
-            'about' => 'about'    
+            'about' => $request->about    
         ]);
         return redirect()->route('home', ['user' => $user]);
     }
 
     public function showLogin()
     {
-        return view('auth.lawyer.login');
+        $user = auth()->user();
+        $client = Auth::guard('client')->user();
+        if (!$user && !$client) {
+            return view('auth.lawyer.login');
+        } else{
+            return redirect()->route('home');
+        }
     }
 
     public function login(Request $request){
@@ -46,5 +58,13 @@ class LawyerController extends Controller
         if(Auth::attempt($credentials)){
             return redirect()->route('home');
         }
+        return back()->withErrors([
+            'credentials' => 'Invalid lawyer credentials',
+        ]);
+    }
+
+    public function logout(){
+        auth()->logout();
+        return redirect()->route('home');
     }
 }

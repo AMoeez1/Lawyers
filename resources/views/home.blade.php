@@ -1,35 +1,33 @@
-<html lang="en">
+@extends('layouts.pages');
+@section('title', 'Home - LawyerConnect');
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        .hero-bg {
-            background-image: url('{{ asset('lawyer.jpg') }}');
-            background-size: cover;
-            background-position: center;
-        }
-    </style>
-</head>
-
-<body>
-    @include('components.nav',['client' => $client])
-    <!-- Hero Section -->
+@section('content')
     <section class="hero-bg bg-black h-screen flex items-center justify-center text-center text-white">
         {{-- <img src="{{asset('lawyers.jpg')}}" alt=""> --}}
+        @if(!auth()->check())
         <div class="px-4 py-8  bg-opacity-70 rounded-lg">
             <h1 class="text-4xl font-bold mb-4">Find the Right Lawyer for Your Needs</h1>
             <p class="text-lg mb-6">Connect with experienced legal professionals in just a few clicks. Get personalized
                 legal advice and representation tailored to your needs.</p>
+                
             <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Book a
                 Lawyer Now</a>
-            <a href="/lawyer/   register"
-                class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Register As
-                Lawyer</a>
-        </div>
+            @if(auth()->guard('client')->user())
+            <a href="/post" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Add Post</a>
+            @else
+            <a href="/lawyer/register" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Register As Lawyer</a>
+            @endif
+            </div>
+            @else
+        <div class="px-4 py-8  bg-opacity-70 rounded-lg">
+            <h1 class="text-4xl font-bold mb-4">Find Clients</h1>
+            <p class="text-lg mb-6">Connect with 1000+ clients in just a few clicks. Fight on their behalf and get paid for that.</p>
+                
+            <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Terms And Condition</a>
+            {{-- <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg"></a> --}}
+            
+            </div>
+            @endif
     </section>
 
     <!-- How It Works -->
@@ -187,16 +185,4 @@
             </div>
         </div>
     </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-6">
-        <div class="container mx-auto px-4 text-center">
-            <a href="#" class="text-blue-400 hover:underline">Privacy Policy</a> |
-            <a href="#" class="text-blue-400 hover:underline">Terms of Service</a> |
-            <a href="#" class="text-blue-400 hover:underline">Site Map</a> |
-            <a href="#" class="text-blue-400 hover:underline">Accessibility Statement</a>
-        </div>
-    </footer>
-</body>
-
-</html>
+@stop

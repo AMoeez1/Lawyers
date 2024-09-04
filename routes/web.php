@@ -17,6 +17,8 @@ Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
     
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
+Route::get('/post',[HomeController::class, 'showPost'])->name('post.form');
+Route::post('/post',[HomeController::class, 'post'])->name('post');
 
 Route::group(['prefix' => 'lawyer', 'as' => 'lawyer.'], function () {
     Route::get('login', [LawyerController::class, 'showLogin'])->name('login.form');
@@ -25,6 +27,7 @@ Route::group(['prefix' => 'lawyer', 'as' => 'lawyer.'], function () {
     Route::get('register',[LawyerController::class, 'showRegister'])->name('regsiter.form');
     Route::post('register',[LawyerController::class, 'register'])->name('register');
 
+    Route::post('logout',[LawyerController::class,'logout'])->name('logout');
     // Route::middleware('auth:lawyer', function () {
     //     Route::get('/');
     // });
