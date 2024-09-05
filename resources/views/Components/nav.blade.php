@@ -27,7 +27,7 @@
                     @if (auth()->guard('client')->user() || auth()->user())
                         <a href="/profile" class="hover:text-gray-400">Profile</a>
                     @else
-                        <a href="/client/register" class="hover:text-gray-400">Regsiter</a>
+                        <a href="/client/login" class="hover:text-gray-400">Login</a>
                     @endif
                     <a href="#contact" class="hover:text-gray-400">Contact Us</a>
                     @if (auth()->guard('client')->user() || auth()->user())
@@ -60,7 +60,7 @@
                 @if (auth()->guard('client')->user() || auth()->user())
                     <a href="/profile" class="hover:text-gray-400">Profile</a>
                 @else
-                    <a href="/client/register" class="hover:text-gray-400">Regsiter</a>
+                    <a href="/client/login" class="hover:text-gray-400">Login</a>
                 @endif
                 <a href="#contact" class="hover:text-gray-400">Contact Us</a>
                 @if (auth()->guard('client')->user() || auth()->user())

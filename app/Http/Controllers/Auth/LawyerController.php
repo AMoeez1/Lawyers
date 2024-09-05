@@ -21,7 +21,7 @@ class LawyerController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
+        $validate = $request->validate([
             'name' => 'required',
             'email' => 'required|email',
             'password' => 'required|min:8',
@@ -30,17 +30,31 @@ class LawyerController extends Controller
             'degree' => 'required',
             'about' => 'required|max:150'
         ]);
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'CNIC' => $request->CNIC,
-            'proficiency' => $request->proficiency,
-            'degree' => $request->degree,
-            'about' => $request->about    
-        ]);
-        return redirect()->route('home', ['user' => $user]);
+        if($validate){
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'CNIC' => $request->CNIC,
+                'proficiency' => $request->proficiency,
+                'degree' => $request->degree,
+                'about' => $request->about    
+            ]);
+            if($user){
+                Auth::login($user);
+                return redirect()->route('home', ['user' => $user]);
+            } else{
+                return back()->withErrors([
+                    'register' => "there's something wrong registering account. Make sure to fill all the fields"
+                ]);
+            }
+        } else{
+            return back()->withErrors([
+                'validation' => 'Something went wrong validating your account. Try Again!'
+            ]);
+        }
     }
+
 
     public function showLogin()
     {

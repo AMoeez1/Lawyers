@@ -13,8 +13,9 @@ class HomeController extends Controller
     {
         $client = Auth::guard('client')->user();
         $allUser = User::all();
+        $posts = Posts::all();
         $lawyer = auth()->user();
-        return view('home', ['client' => $client, 'AllUsers' => $allUser, 'lawyer' => $lawyer]);
+        return view('home', ['client' => $client, 'AllUsers' => $allUser, 'lawyer' => $lawyer, 'posts' => $posts]);
     }
     public function profile()
     {

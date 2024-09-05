@@ -9,7 +9,7 @@
     </title>
 </head>
 <body>
-    <div class="bg-gray-100 min-h-screen h-screen overflow-x-hidden">
+    <div class="bg-gray-100 min-h-screen h-screen overflow-x-hidden scroll-smooth">
         <div class="header w-screen">
             @include('components.nav')
         </div>

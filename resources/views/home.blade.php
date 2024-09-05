@@ -4,30 +4,35 @@
 @section('content')
     <section class="hero-bg bg-black h-screen flex items-center justify-center text-center text-white">
         {{-- <img src="{{asset('lawyers.jpg')}}" alt=""> --}}
-        @if(!auth()->check())
-        <div class="px-4 py-8  bg-opacity-70 rounded-lg">
-            <h1 class="text-4xl font-bold mb-4">Find the Right Lawyer for Your Needs</h1>
-            <p class="text-lg mb-6">Connect with experienced legal professionals in just a few clicks. Get personalized
-                legal advice and representation tailored to your needs.</p>
-                
-            <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Book a
-                Lawyer Now</a>
-            @if(auth()->guard('client')->user())
-            <a href="/post" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Add Post</a>
-            @else
-            <a href="/lawyer/register" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Register As Lawyer</a>
-            @endif
+        @if (!auth()->check())
+            <div class="px-4 py-8  bg-opacity-70 rounded-lg">
+                <h1 class="text-4xl font-bold mb-4">Find the Right Lawyer for Your Needs</h1>
+                <p class="text-lg mb-6">Connect with experienced legal professionals in just a few clicks. Get personalized
+                    legal advice and representation tailored to your needs.</p>
+
+                <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Book a
+                    Lawyer Now</a>
+                @if (auth()->guard('client')->user())
+                    <a href="/post" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Add
+                        Post</a>
+                @else
+                    <a href="/lawyer/register"
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Register As
+                        Lawyer</a>
+                @endif
             </div>
-            @else
-        <div class="px-4 py-8  bg-opacity-70 rounded-lg">
-            <h1 class="text-4xl font-bold mb-4">Find Clients</h1>
-            <p class="text-lg mb-6">Connect with 1000+ clients in just a few clicks. Fight on their behalf and get paid for that.</p>
-                
-            <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Terms And Condition</a>
-            {{-- <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg"></a> --}}
-            
+        @else
+            <div class="px-4 py-8  bg-opacity-70 rounded-lg">
+                <h1 class="text-4xl font-bold mb-4">Find Clients</h1>
+                <p class="text-lg mb-6">Connect with 1000+ clients in just a few clicks. Fight on their behalf and get paid
+                    for that.</p>
+
+                <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Terms
+                    And Condition</a>
+                {{-- <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg"></a> --}}
+
             </div>
-            @endif
+        @endif
     </section>
 
     <!-- How It Works -->
@@ -85,45 +90,44 @@
     </section>
 
     <!-- Featured Lawyers -->
-    <section class="py-12 bg-gray-50">
+    <section class="py-12 bg-gray-50" id="lawyers">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-8">Featured Lawyers</h2>
             <div class="grid grid-cols-12 gap-8">
-                @foreach($AllUsers as $user)
-                <!-- Repeat for each featured lawyer -->
-                <div class="col-span-4 bg-white p-6 rounded-lg shadow-lg text-center">
-                    {{-- <img src="lawyer-photo.jpg" alt="Lawyer" class="w-24 h-24 rounded-full mx-auto mb-4"> --}}
-                    <h3 class="text-xl font-semibold mb-2">{{$user->name}}</h3>
-                    <p class="text-gray-700 mb-4">{{$user->proficiency}}</p>
-                    <p>"{{$user->about}}"</p>
-                    <a href="#book" class="text-blue-500 hover:underline mt-4 block">View Profile</a>
-                    <a href="#book"
-                        class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg mt-2 inline-block">Book
-                        a Consultation</a>
-                </div>
-                <!-- Add more featured lawyers similarly -->
+                @foreach ($AllUsers as $user)
+                    <!-- Repeat for each featured lawyer -->
+                    <div class="col-span-4 bg-white p-6 rounded-lg shadow-lg text-center">
+                        {{-- <img src="lawyer-photo.jpg" alt="Lawyer" class="w-24 h-24 rounded-full mx-auto mb-4"> --}}
+                        <h3 class="text-xl font-semibold mb-2">{{ $user->name }}</h3>
+                        <p class="text-gray-700 mb-4">{{ $user->proficiency }}</p>
+                        <p>"{{ $user->about }}"</p>
+                        <a href="#book" class="text-blue-500 hover:underline mt-4 block">View Profile</a>
+                        <a href="#book"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg mt-2 inline-block">Book
+                            a Consultation</a>
+                    </div>
+                    <!-- Add more featured lawyers similarly -->
                 @endforeach
             </div>
         </div>
     </section>
 
     <!-- Client Testimonials -->
-    <section class="py-12 bg-white">
+    <section class="py-12 bg-white" id="cases">
         <div class="container mx-auto px-4">
-            <h2 class="text-3xl font-bold text-center mb-8">Client Testimonials</h2>
+            <h2 class="text-3xl font-bold text-center mb-8">Cases Study</h2>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Repeat for each testimonial -->
-                <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
-                    <p class="italic mb-4">"LawyerConnect made finding and booking a lawyer incredibly easy. I had my
-                        consultation within days and felt confident about my case."</p>
-                    <p class="font-semibold">Sarah L.</p>
-                </div>
-                <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
-                    <p class="italic mb-4">"The process was straightforward, and I found a fantastic lawyer for my
-                        business needs. Highly recommend!"</p>
-                    <p class="font-semibold">James R.</p>
-                </div>
-                <!-- Add more testimonials similarly -->
+                @foreach ($posts as $post)
+                    <!-- Repeat for each testimonial -->
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-lg text-center">
+                        <p class="text-xl">{{ $post->title }}</p>
+                        <p class=" mb-4">{{ $post->details }}</p>
+                        <p class="font-semibold">RS - {{ $post->price }} <span class="text-sm font-normal">per visit</span>
+                        </p>
+                        <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg mt-2 inline-block">
+                            Interested</a>
+                    </div>
+                @endforeach
             </div>
         </div>
     </section>
@@ -144,7 +148,7 @@
     </section>
 
     <!-- Frequently Asked Questions -->
-    <section class="py-12 bg-white">
+    <section class="py-12 bg-white" id="FAQ">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-8">Frequently Asked Questions</h2>
             <div class="space-y-6">
@@ -166,7 +170,7 @@
 
 
     {{-- Contact US --}}
-    <section class="py-12 bg-gray-50">
+    <section class="py-12 bg-gray-50" id="contact">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-8">Contact Us</h2>
             <div class="text-center">
