@@ -22,8 +22,8 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8">
                     {{-- <a href="#how-it-works" class="hover:text-gray-400">How It Works</a> --}}
-                    <a href="/" class="hover:text-gray-400">Home</a>
-                    <a href="#featured-lawyers" class="hover:text-gray-400">Lawyers</a>
+                    <a href="/  " class="hover:text-gray-400">Home</a>
+                    <a href="#lawyers" class="hover:text-gray-400">Lawyers</a>
                     @if (auth()->guard('client')->user() || auth()->user())
                         <a href="/profile" class="hover:text-gray-400">Profile</a>
                     @else

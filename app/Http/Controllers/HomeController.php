@@ -12,7 +12,7 @@ class HomeController extends Controller
     public function index()
     {
         $client = Auth::guard('client')->user();
-        $allUser = User::all();
+        $allUser = User::inRandomOrder()->limit(3)->get();
         $posts = Posts::all();
         $lawyer = auth()->user();
         return view('home', ['client' => $client, 'AllUsers' => $allUser, 'lawyer' => $lawyer, 'posts' => $posts]);
@@ -50,9 +50,9 @@ class HomeController extends Controller
             return redirect()->route('home');
     }
 
-    public function getUserByEmail($email){
-        $user = User::where('email', $email)->firstOrFail();
-        $posts = $user->posts();
-    }
+    // function bookLawyer(Request $request, $id){
+    //     $user = User::find($id);
+
+    // }
 
 }

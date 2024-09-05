@@ -1,23 +1,11 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile</title>
-</head>
-<body>
-    <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com?plugins=forms,typography"></script>
-  </head>
-  <body>
-    
+@extends('layouts.pages')
+@section('title', 'profile');
 
+@section('content')
 <div class="bg-s text-primary-foreground min-h-screen">
   <header class="bg-primary py-4">
     <div class="container mx-auto flex items-center justify-between">
-      <button class="bg-secondary text-secondary-foreground px-4 py-2 rounded-lg">Edit Profile</button>
+      {{-- <button class="bg-secondary text-secondary-foreground px-4 py-2 rounded-lg">Edit Profile</button> --}}
     </div>
   </header>
   <div class="container mx-auto mt-8">
@@ -40,16 +28,11 @@
         <h3 class="text-lg font-semibold">Contact Information</h3>
         <ul class="mt-2">
           <li>Email: {{$client ? $client->email : $lawyer->email}}</li>
-          <li>Phone: +1 234 567 890</li>
+          <li> {{ $lawyer ? 'Proficiency: ' . $lawyer->proficiency : ''}}</li>
           <li></li>
         </ul>
       </div>
     </div>
   </div>
 </div>
-
-
-  </body>
-</html>
-</body>
-</html>
+@endsection

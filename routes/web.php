@@ -28,6 +28,8 @@ Route::group(['prefix' => 'lawyer', 'as' => 'lawyer.'], function () {
     Route::post('register',[LawyerController::class, 'register'])->name('register');
 
     Route::post('logout',[LawyerController::class,'logout'])->name('logout');
+
+// Route::post('/bookLawyer',[HomeController::class, 'bookLawyer'])->name('booking');
     // Route::middleware('auth:lawyer', function () {
     //     Route::get('/');
     // });

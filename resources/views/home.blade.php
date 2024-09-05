@@ -1,8 +1,7 @@
-@extends('layouts.pages');
-@section('title', 'Home - LawyerConnect');
-
+@extends('layouts.pages')
+@section('title', 'Home - LawyerConnect')
 @section('content')
-    <section class="hero-bg bg-black h-screen flex items-center justify-center text-center text-white">
+    <section class="hero-bg bg-black h-screen flex items-center justify-center text-center text-white" id="home">
         {{-- <img src="{{asset('lawyers.jpg')}}" alt=""> --}}
         @if (!auth()->check())
             <div class="px-4 py-8  bg-opacity-70 rounded-lg">
@@ -101,10 +100,13 @@
                         <h3 class="text-xl font-semibold mb-2">{{ $user->name }}</h3>
                         <p class="text-gray-700 mb-4">{{ $user->proficiency }}</p>
                         <p>"{{ $user->about }}"</p>
-                        <a href="#book" class="text-blue-500 hover:underline mt-4 block">View Profile</a>
-                        <a href="#book"
-                            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg mt-2 inline-block">Book
-                            a Consultation</a>
+                        {{-- <a href="#book" class="text-blue-500 hover:underline mt-4 block">View Profile</a> --}}
+                        <form method="POST">
+                            @csrf
+                            <a href="#book" id="book"
+                                class="bg-blue-500 hover:bg-blue-600  text-white font-semibold py-2 px-4 rounded-lg mt-2 inline-block">Book
+                                a Consultation</a>
+                        </form>
                     </div>
                     <!-- Add more featured lawyers similarly -->
                 @endforeach
@@ -124,7 +126,8 @@
                         <p class=" mb-4">{{ $post->details }}</p>
                         <p class="font-semibold">RS - {{ $post->price }} <span class="text-sm font-normal">per visit</span>
                         </p>
-                        <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg mt-2 inline-block">
+                        <a href="#book"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg mt-2 inline-block">
                             Interested</a>
                     </div>
                 @endforeach
@@ -190,3 +193,11 @@
         </div>
     </section>
 @stop
+<script>
+    function bookLawyer() {
+        const book = document.getElementById('book');
+        const req = document.getElementById('req');
+        book.classList.add('display');
+        req.classList.remove('block');
+    }
+</script>
