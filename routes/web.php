@@ -13,10 +13,11 @@ Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
     Route::get('register', [ClientController::class, 'showRegister'])->name('register.form');
     Route::post('register', [ClientController::class, 'register'])->name('register');
 
+    Route::get('/profile/{id}', [ClientController::class, 'profile'])->name('profile');
+    Route::post('/profile/{id}', [ClientController::class, 'edit_profile'])->name('edit_profile');
 });
     
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/profile', [HomeController::class, 'profile'])->name('profile');
 Route::get('/post',[HomeController::class, 'showPost'])->name('post.form');
 Route::post('/post',[HomeController::class, 'post'])->name('post');
 

@@ -22,10 +22,10 @@
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8">
                     {{-- <a href="#how-it-works" class="hover:text-gray-400">How It Works</a> --}}
-                    <a href="/  " class="hover:text-gray-400">Home</a>
+                    <a href="/" class="hover:text-gray-400">Home</a>
                     <a href="#lawyers" class="hover:text-gray-400">Lawyers</a>
                     @if (auth()->guard('client')->user() || auth()->user())
-                        <a href="/profile" class="hover:text-gray-400">Profile</a>
+                        <a href="/client/profile/{{$client->id}}" class="hover:text-gray-400">Profile</a>
                     @else
                         <a href="/client/login" class="hover:text-gray-400">Login</a>
                     @endif

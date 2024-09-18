@@ -1,5 +1,5 @@
-@extends('layouts.pages');
-@section('title', 'Post - LawyerConnect');
+@extends('layouts.pages')
+@section('title', 'Post - LawyerConnect')
 
 @section('content')
 <div class="my-12 flex justify-center">

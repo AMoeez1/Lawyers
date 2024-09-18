@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Client extends Authenticatable
 {
     use HasFactory;
-    public $fillable = ['name', 'email', 'password'];
+    public $fillable = ['name', 'email', 'password', 'image'];
     
     public $hidden = ['password'];
 }
