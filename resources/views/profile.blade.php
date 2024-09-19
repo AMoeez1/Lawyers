@@ -1,8 +1,3 @@
-{{-- Font Awesome Icons --}}
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/solid.min.css" rel="stylesheet" />
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/svg-with-js.min.css" rel="stylesheet" />
-
 @extends('layouts.pages')
 @section('title', 'profile - ' . auth()->guard('client')->user()->name)
 
@@ -23,11 +18,29 @@
                 @if (auth()->guard('client')->user())
                     <div class="grid grid-cols-12">
                         <div class="col-span-3">
-                            <img src="{{ asset('storage/' . auth()->guard('client')->user()->image) }}" alt="">
+                            <div class="flex h-full justify-center items-center">
+                                @if (auth()->guard('client')->user()->image)
+                                    <div class="mb-4 col-span-3">
+                                        <label for="imageUpload" class="cursor-pointer">
+                                            <div
+                                                class="relative w-40 h-40 rounded-full overflow-hidden bg-gray-900 hover:bg-opacity-50">
+                                                <img class="object-cover w-full h-full"
+                                                    src="{{ asset('storage/' . auth()->guard('client')->user()->image) }}"
+                                                    width="150" height="150" alt="Profile Image" />
+                                            </div>
+                                        </label>
+                                    </div>
+                                @else
+                                    <div class="mb-4 col-span-3">
+                                        <img class="object-cover w-40" src="{{ asset('storage/user.png') }}"
+                                           alt="Profile Image" />
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                         <div class="col-span-9 bg-white py-4 px-10">
                             <div class="flex justify-end">
-                                <a href="client/edit" . {{auth()->guard('client')->user()->id}}>
+                                <a href="{{ url('client/profile/edit/' . auth()->guard('client')->user()->id) }}">
                                     <i class="far fa-edit cursor-pointer text-2xl"></i>
                                 </a>
                             </div>

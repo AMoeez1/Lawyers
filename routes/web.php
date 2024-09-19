@@ -17,6 +17,8 @@ Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
 
     Route::get('/profile/edit/{id}', [ClientController::class, 'show_edit'])->name('show_edit');
     Route::post('/profile/{id}', [ClientController::class, 'edit_profile'])->name('edit_profile');
+
+    Route::post('/remove/profile/{id}', [ClientController::class, 'removeProfile'])->name('remove_profile_pic');
 });
     
 Route::get('/', [HomeController::class, 'index'])->name('home');

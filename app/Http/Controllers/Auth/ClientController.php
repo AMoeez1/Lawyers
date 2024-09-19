@@ -111,4 +111,26 @@ class ClientController extends Controller
             return back()->withErrors(['Error' => 'Validation Failed']);
         }
     }
+
+    public function removeProfile($id) {
+        $user = Client::find($id);
+    
+        if (!$user) {
+            return back()->withErrors(['Error' => 'User not found']);
+        }
+    
+        if ($user->image) {
+            $removedImg = Storage::disk('public')->delete($user->image);
+            $user->image = null;
+            $user->save();
+            if ($removedImg) {
+                return redirect()->route('client.profile', ['id' => $user->id]);
+            } else {
+                return back()->withErrors(['Error' => 'Error Removing Img']);
+            }
+        } else {
+            return back()->withErrors(['Error' => 'No img found']);
+        }
+    }
+    
 }
