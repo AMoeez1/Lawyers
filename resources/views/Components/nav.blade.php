@@ -5,40 +5,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title></title>
-    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.2.7/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        .relative:hover .hidden {
+            display: block;
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="bg-gray-900 text-white">
+    <nav class="bg-white ">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between py-4">
                 <!-- Logo -->
                 <div class="text-2xl font-bold">
-                    <a href="/" class="text-white hover:text-gray-300">LawyerConnect</a>
+                    <a href="/" class="">LawyerConnect</a>
                 </div>
 
                 <!-- Desktop Menu -->
-                <div class="hidden md:flex space-x-8">
+                <div class="hidden md:flex md:items-center space-x-8">
                     {{-- <a href="#how-it-works" class="hover:text-gray-400">How It Works</a> --}}
-                    <a href="/" class="hover:text-gray-400">Home</a>
-                    <a href="#lawyers" class="hover:text-gray-400">Lawyers</a>
+                    <a href="/" class="hover:text-gray-400 font-bold">Home</a>
+                    <a href="#lawyers" class="hover:text-gray-400 font-semibold">Lawyers</a>
+                    <a href="#contact" class="hover:text-gray-400 font-semibold">Contact Us</a>
                     @if (auth()->guard('client')->user() || auth()->user())
-                        <a href="/client/profile/{{$client->id}}" class="hover:text-gray-400">Profile</a>
+                        {{-- <a href="/client/profile/{{auth()->guard('client')->user()->id}}" class="hover:text-gray-400">
+                            <img src="{{asset('storage/' . auth()->guard('client')->user()->image)}}" width="40" class="rounded-full" />
+                        </a> --}}
+
+                        <div class="relative inline-block text-left">
+                            @if (auth()->guard('client')->user()->image)
+                                <a href="/client/profile/{{ auth()->guard('client')->user()->id }}"
+                                    class="hover:text-gray-400">
+                                    <img src="{{ asset('storage/' . auth()->guard('client')->user()->image) }}"
+                                        width="40" class="rounded-full" />
+                                </a>
+                            @else
+                                <a href="/client/profile/{{ auth()->guard('client')->user()->id }}"
+                                    class="hover:text-gray-400">
+                                    <i class="fas fa-user"></i>
+                                </a>
+                            @endif
+                            <div class="absolute right-0 z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block">
+                                <div class="py-1">
+                                    <a href="/client/profile/{{ auth()->guard('client')->user()->id }}"
+                                        class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Profile</a>
+                                    <a href="/client/settings" class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Settings</a>
+                                    <form method="post"
+                                        action="{{ auth()->guard('client')->user() ? route('client.logout') : route('lawyer.logout') }}">
+                                        @csrf
+                                        <button
+                                            class="text-gray-700 block px-4 py-2 text-sm hover:bg-gray-100">Logout</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     @else
-                        <a href="/client/login" class="hover:text-gray-400">Login</a>
+                        <a href="/client/login" class="hover:text-gray-400 font-semibold">Login</a>
                     @endif
-                    <a href="#contact" class="hover:text-gray-400">Contact Us</a>
-                    @if (auth()->guard('client')->user() || auth()->user())
-                        <form method="post" action="{{ auth()->guard('client')->user() ? route('client.logout') :  route('lawyer.logout')}}">
-                            @csrf
-                            <button class="flex items-center text- gap-2">
-                                <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
-                                Logout
-                            </button>
+                    {{-- @if (auth()->guard('client')->user() || auth()->user())
+                    <form method="post" action="{{ auth()->guard('client')->user() ? route('client.logout') :  route('lawyer.logout')}}">
+                        @csrf
+                        <button class="flex items-center text- gap-2">
+                            <i class="fa fa-circle-o-notch" aria-hidden="true"></i>
+                            Logout
+                        </button>
                         </form>
-                    @endif
+                    @endif --}}
+
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -64,7 +99,8 @@
                 @endif
                 <a href="#contact" class="hover:text-gray-400">Contact Us</a>
                 @if (auth()->guard('client')->user() || auth()->user())
-                    <form method="post" action="{{ auth()->guard('client')->user() ? route('client.logout') : route('lawyer.logout') }}">
+                    <form method="post"
+                        action="{{ auth()->guard('client')->user() ? route('client.logout') : route('lawyer.logout') }}">
                         @csrf
                         <button class="flex items-center text- gap-2">
                             <i class="fa fa-circle-o-notch" aria-hidden="true"></i>

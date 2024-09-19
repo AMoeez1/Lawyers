@@ -77,6 +77,10 @@ class ClientController extends Controller
         }
     }
 
+    public function show_edit(){
+        return view('edit_Profile');
+    }
+
     public function edit_profile(Request $request, $id)
     {
         $validate = $request->validate([

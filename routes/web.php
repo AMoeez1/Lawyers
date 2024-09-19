@@ -14,6 +14,8 @@ Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
     Route::post('register', [ClientController::class, 'register'])->name('register');
 
     Route::get('/profile/{id}', [ClientController::class, 'profile'])->name('profile');
+
+    Route::get('/profile/edit/{id}', [ClientController::class, 'show_edit'])->name('show_edit');
     Route::post('/profile/{id}', [ClientController::class, 'edit_profile'])->name('edit_profile');
 });
     

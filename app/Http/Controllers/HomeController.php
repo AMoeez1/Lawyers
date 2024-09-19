@@ -18,16 +18,6 @@ class HomeController extends Controller
         $lawyer = auth()->user();
         return view('home', ['client' => $client, 'AllUsers' => $allUser, 'lawyer' => $lawyer, 'posts' => $posts]);
     }
-    // public function profile()
-    // {
-    //     $client = Auth::guard('client')->user();
-    //     $lawyer = auth()->user();
-    //     if($client || $lawyer){
-    //         return view('profile', ['client' => $client, 'lawyer' => $lawyer]);
-    //     } else{
-    //         return redirect()->route('home');
-    //     }
-    // }
 
     public function showPost(){
         return view('post');
