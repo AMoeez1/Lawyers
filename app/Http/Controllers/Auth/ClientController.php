@@ -128,8 +128,6 @@ class ClientController extends Controller
             } else {
                 return back()->withErrors(['Error' => 'Error Removing Img']);
             }
-        } else {
-            return back()->withErrors(['Error' => 'No img found']);
         }
     }
     

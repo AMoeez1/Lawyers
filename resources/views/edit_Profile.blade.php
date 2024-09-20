@@ -7,7 +7,7 @@
             @csrf
             <div class="col-span-3">
                 @if (auth()->guard('client')->user()->image)
-                    <div class="mb-4 col-span-3">
+                    <div class="mb-4 col-span-3 flex justify-center items-center h-full">
                         <label for="imageUpload" class="cursor-pointer">
                             <div class="relative w-40 h-40 rounded-full overflow-hidden bg-gray-900 hover:bg-opacity-50">
                                 <img class="object-cover w-full h-full transition-opacity duration-200 ease-in-out hover:opacity-50"
@@ -49,18 +49,13 @@
 
             </div>
             <div class="col-span-3">
-                <label for="name" class="block mb-2">Full Name</label>
-                <input type="text" id="name" value="{{ auth()->guard('client')->user()->name }}" name="name"
-                    placeholder="Enter your full name"
-                    class="w-full px-3 py-2 mb-4 text-black placeholder-input text-input border border-border rounded-md focus:outline-none focus:ring ring-primary" />
-
-                <label for="email" class="block mb-2">Email Address</label>
-                <input type="email" id="email" value="{{ auth()->guard('client')->user()->email }}" name="email"
-                    placeholder="Enter your email address"
-                    class="w-full px-3 py-2 mb-4 text-black placeholder-input text-input border border-border rounded-md focus:outline-none focus:ring ring-primary" />
-                <button type="submit"
-                    class="w-full bg-gray-400 hover:bg-gray-500 py-2 rounded-md transition duration-300">Edit
-                    Profile</button>
+                <x-bladewind::input required="false" name="name" selected_value="{{ auth()->guard('client')->user()->name }}"
+                     label="Name" />
+                    <x-bladewind::input required="false" name="email" selected_value="{{ auth()->guard('client')->user()->email }}"
+                     label="Email" />
+                    <x-bladewind::button class="w-full" type="secondary" can_submit="true">
+                        Edit Profile
+                    </x-bladewind::button>
 
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -76,7 +71,7 @@
         </form>
 
         @if (auth()->guard('client')->check() && auth()->guard('client')->user()->image)
-        <form action="{{ route('client.remove_profile_pic', ['id' => auth()->guard('client')->user()->id]) }}" method="POST">
+        <form class="ml-40" action="{{ route('client.remove_profile_pic', ['id' => auth()->guard('client')->user()->id]) }}" method="POST">
             @csrf
             <x-bladewind::button type="secondary" can_submit="true" outline="true">
                 Remove Current Profile
@@ -87,7 +82,6 @@
     @endif
     
     </div>
-
 @endSection
 
 <script>
@@ -102,4 +96,5 @@
             reader.readAsDataURL(file);
         }
     }
+    
 </script>

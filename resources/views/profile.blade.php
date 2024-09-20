@@ -16,14 +16,14 @@
                 <p class="text-secondary"></p>
 
                 @if (auth()->guard('client')->user())
-                    <div class="grid grid-cols-12">
+                    <div class="">
                         <div class="col-span-3">
-                            <div class="flex h-full justify-center items-center">
+                            {{-- <div class="flex h-full justify-center items-center">
                                 @if (auth()->guard('client')->user()->image)
                                     <div class="mb-4 col-span-3">
                                         <label for="imageUpload" class="cursor-pointer">
                                             <div
-                                                class="relative w-40 h-40 rounded-full overflow-hidden bg-gray-900 hover:bg-opacity-50">
+                                                class="relative w-60 h-60 rounded-full overflow-hidden bg-gray-900 hover:bg-opacity-50">
                                                 <img class="object-cover w-full h-full"
                                                     src="{{ asset('storage/' . auth()->guard('client')->user()->image) }}"
                                                     width="150" height="150" alt="Profile Image" />
@@ -36,14 +36,33 @@
                                            alt="Profile Image" />
                                     </div>
                                 @endif
+                            </div> --}}
+                        </div>
+                        <div class=" bg-white py-4 px-10">
+                          <div class="flex">
+                            @if (auth()->guard('client')->user()->image)
+                                <div class="mb-4 ml-auto">
+                                    <label for="imageUpload" class="cursor-pointer">
+                                        <div
+                                            class="relative my-4 w-40 h-40 rounded-full overflow-hidden bg-gray-900 hover:bg-opacity-50">
+                                            <img class="object-cover w-full h-full"
+                                                src="{{ asset('storage/' . auth()->guard('client')->user()->image) }}"
+                                                width="150" height="150" alt="Profile Image" />
+                                        </div>
+                                    </label>
+                                </div>
+                            @else
+                                <div class="mb-4 col-span-3">
+                                    <img class="object-cover w-40" src="{{ asset('storage/user.png') }}"
+                                       alt="Profile Image" />
+                                </div>
+                            @endif
+                            <div class="flex ml-auto">
+                              <a href="{{ url('client/profile/edit/' . auth()->guard('client')->user()->id) }}">
+                                <i class="far fa-edit cursor-pointer text-2xl"></i>
+                            </a>
                             </div>
                         </div>
-                        <div class="col-span-9 bg-white py-4 px-10">
-                            <div class="flex justify-end">
-                                <a href="{{ url('client/profile/edit/' . auth()->guard('client')->user()->id) }}">
-                                    <i class="far fa-edit cursor-pointer text-2xl"></i>
-                                </a>
-                            </div>
                             <p>Full Name</p>
                             <h3 class="text-xl font-semibold mb-3">{{ auth()->guard('client')->user()->name }}</h3>
                             <p>Email</p>
