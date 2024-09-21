@@ -31,7 +31,7 @@
                         <a href="/client/profile/{{ auth()->user()->id }}" class="hover:text-gray-400">
                             <x-bladewind::dropmenu trigger="<i class='fas fa-user'></i>" trigger_css="">
                                 <x-bladewind::dropmenu-item>
-                                    <a href="/client/profile/{{ auth()->user()->id }}" class="px-4">Profile</a>
+                                    <a href="{{auth()->user() ? url('/lawyer/profile/' . auth()->user()->id) : url('/client/profile/' . auth()->user()->id) }}" class="px-4">Profile</a>
                                 </x-bladewind::dropmenu-item>
                                 <x-bladewind::dropmenu-item>
                                     <form method="post" class="m-0" action="{{ route('lawyer.logout') }}">
@@ -77,7 +77,7 @@
                                 </x-bladewind::dropmenu-item>
                             </x-bladewind::dropmenu>
                     @endif
-                    @else
+                    
                 </div>
                 <a href="/client/login" class="hover:text-gray-400 font-semibold">Login</a>
                 @endif

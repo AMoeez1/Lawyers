@@ -77,8 +77,13 @@ class ClientController extends Controller
         }
     }
 
-    public function show_edit(){
-        return view('edit_Profile');
+    public function show_edit($id){
+        $user = Client::find($id);
+        if($user) {
+            return view('edit_Profile');
+        } else {
+            return redirect()->route('home');
+        }
     }
 
     public function edit_profile(Request $request, $id)

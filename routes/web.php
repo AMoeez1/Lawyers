@@ -28,12 +28,17 @@ Route::post('/post',[HomeController::class, 'post'])->name('post');
 Route::group(['prefix' => 'lawyer', 'as' => 'lawyer.'], function () {
     Route::get('login', [LawyerController::class, 'showLogin'])->name('login.form');
     Route::post('login',[LawyerController::class,'login'])->name('login');
+    Route::post('logout',[LawyerController::class,'logout'])->name('logout');
 
     Route::get('register',[LawyerController::class, 'showRegister'])->name('regsiter.form');
     Route::post('register',[LawyerController::class, 'register'])->name('register');
 
-    Route::post('logout',[LawyerController::class,'logout'])->name('logout');
+    Route::get('/profile/{id}', [LawyerController::class,'profile'])->name('profile');
 
+    Route::get('/profile/edit/{id}', [LawyerController::class,'show_edit'])->name('show_edit');
+    Route::post('/profile/edit/{id}', [LawyerController::class,'edit_profile'])->name('edit_profile');
+
+    Route::post('/remove/profile/{id}', [LawyerController::class,'removeProfile'])->name('remove_profile_pic');
 // Route::post('/bookLawyer',[HomeController::class, 'bookLawyer'])->name('booking');
     // Route::middleware('auth:lawyer', function () {
     //     Route::get('/');

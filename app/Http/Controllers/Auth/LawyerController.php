@@ -4,6 +4,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LawyerController extends Controller
 {
@@ -75,5 +76,82 @@ class LawyerController extends Controller
     {
         auth()->logout();
         return redirect()->route('home');
+    }
+
+    public function profile($id)
+    {
+        $lawyer = User::find($id);
+        if ($lawyer && $lawyer->id == $id) {
+            return view('profile');
+        } else {
+            return redirect()->route('home');
+        }
+    }
+
+    public function show_edit($id)
+    {
+        $user = User::find($id);
+        if($user && $user->id == $id) {
+            return view('edit_Profile');
+        } else {
+            return redirect()->route('home');
+        }
+    }
+
+    public function edit_profile(Request $request, $id)
+    {
+        $validate = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'CNIC' => 'required',
+            'proficiency' => 'required',
+            'degree' => 'required',
+            'about' => 'required',
+            'image' => 'required|mimes:jpg,png,jpeg,webp'
+        ]);
+        $user = User::find($id);
+        if ($validate) {
+            if ($user) {
+                $user->name = $request->input(key: 'name');
+                $user->email = $request->input('email');
+                $user->CNIC = $request->input('CNIC');
+                $user->proficiency = $request->input('proficiency');
+                $user->degree = $request->input('degree');
+                $user->about = $request->input('about');
+
+                if ($request->hasFile('image')) {
+                    if ($user->image) {
+                        Storage::disk('public')->delete($user->image);
+                    }
+                    $img_path = $request->file('image')->store('lawyers', 'public');
+                    $user->image = $img_path;
+                }
+                $user->save();
+                return redirect()->route('lawyer.profile', ['id' => $user->id]);
+            } else {
+                return back()->withErrors(['Error' => 'No User Found']);
+            }
+        } else {
+            return back()->withErrors(['Error' => 'Validation Failed']);
+        }
+    }
+
+    public function removeProfile($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return back()->withErrors(['Error' => 'No User Found']);
+        }
+
+        if ($user->image) {
+            $rem_img = Storage::disk('public')->delete($user->image);
+            $user->img = null;
+            $user->save();
+            if ($rem_img) {
+                return redirect()->route('lawyer.profile', ['id' => $user->id]);
+            } else {
+                return back()->withErrors(['Error' => 'Error Removing Image']);
+            }
+        }
     }
 }
