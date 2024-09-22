@@ -1,12 +1,14 @@
 @extends('layouts.pages')
 @section('title', 'Home - LawyerConnect')
 @section('content')
-    <section class="hero-bg bg-black h-screen flex items-center justify-center text-center text-white" id="home">
+    <section class="hero-bg h-80 p-10 md:p-0 bg-black md:screen flex md:items-center justify-center text-center text-white"
+        id="home">
         {{-- <img src="{{asset('lawyers.jpg')}}" alt=""> --}}
         @if (!auth()->check())
-            <div class="px-4 py-8  bg-opacity-70 rounded-lg">
-                <h1 class="text-4xl font-bold mb-4">Find the Right Lawyer for Your Needs</h1>
-                <p class="text-lg mb-6">Connect with experienced legal professionals in just a few clicks. Get personalized
+            <div class="px-4 py-8 bg-opacity-70 rounded-lg">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">Find the Right Lawyer for Your Needs</h1>
+                <p class="text-md md:text-lg mb-6">Connect with experienced legal professionals in just a few clicks. Get
+                    personalized
                     legal advice and representation tailored to your needs.</p>
 
                 <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Book a
@@ -21,20 +23,22 @@
                 @endif
             </div>
         @else
-            <div class="px-4 py-8  bg-opacity-70 rounded-lg">
-                <h1 class="text-4xl font-bold mb-4">Find Clients</h1>
-                <p class="text-lg mb-6">Connect with 1000+ clients in just a few clicks. Fight on their behalf and get paid
+            <div class="px-4 py-8 bg-opacity-70 rounded-lg">
+                <h1 class="text-3xl md:text-4xl font-bold mb-4">Find Clients</h1>
+                <p class="text-md md:text-lg mb-6">Connect with 1000+ clients in just a few clicks. Fight on their behalf
+                    and get paid
                     for that.</p>
-
-                <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">Terms
-                    And Condition</a>
-                {{-- <a href="#book" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg"></a> --}}
-
+                <x-bladewind::button onclick="showModal('tnc-agreement-titled')">
+                    Terms And Condition
+                </x-bladewind::button>
+                <x-bladewind::modal name="tnc-agreement-titled" title="Agree or Disagree">
+                    Please agree to the terms and conditions of
+                    the agreement before proceeding.
+                </x-bladewind::modal>
             </div>
         @endif
     </section>
 
-    <!-- How It Works -->
     <section class="py-12 bg-gray-50 text-gray-800">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-8">How It Works</h2>
@@ -94,9 +98,15 @@
             <h2 class="text-3xl font-bold text-center mb-8">Featured Lawyers</h2>
             <div class="grid grid-cols-12 gap-8">
                 @foreach ($AllUsers as $user)
-                    <!-- Repeat for each featured lawyer -->
-                    <div class="col-span-4 bg-white p-6 rounded-lg shadow-lg text-center">
-                        {{-- <img src="lawyer-photo.jpg" alt="Lawyer" class="w-24 h-24 rounded-full mx-auto mb-4"> --}}
+                    <div class="col-span-12 md:col-span-4 bg-white p-6 rounded-lg shadow-lg text-center cursor-pointer">
+                        @if ($user->image)
+                            <x-bladewind::avatar class="my-4" image="{{ asset('storage/' . $user->image) }}" size="huge" />
+                        @else
+                            <x-bladewind::avatar class="my-4"
+                                image="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
+                                size="huge" />
+                        @endif
+
                         <h3 class="text-xl font-semibold mb-2">{{ $user->name }}</h3>
                         <p class="text-gray-700 mb-4">{{ $user->proficiency }}</p>
                         <p>"{{ $user->about }}"</p>
@@ -108,7 +118,6 @@
                                 a Consultation</a>
                         </form>
                     </div>
-                    <!-- Add more featured lawyers similarly -->
                 @endforeach
             </div>
         </div>

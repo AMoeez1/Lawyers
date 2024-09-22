@@ -64,12 +64,17 @@ class LawyerController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('CNIC', 'email', 'password');
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('home');
+        if($credentials){
+            if (Auth::attempt($credentials)) {
+                return redirect()->route('home');
+            } else {
+                return back()->withErrors([
+                    'credentials' => 'Invalid lawyer credentials',
+                ]);
+            }
+        } else {
+            return back()->withErrors(['Error' => 'Credentials cant be null']);
         }
-        return back()->withErrors([
-            'credentials' => 'Invalid lawyer credentials',
-        ]);
     }
 
     public function logout()

@@ -1,5 +1,6 @@
 @extends('layouts.pages')
-@section('title', 'Profile - ' . (auth()->user() ? auth()->user()->name : (auth()->guard('client')->user() ? auth()->guard('client')->user()->name : 'Guest')))
+@section('title', 'Profile - ' . (auth()->user() ? auth()->user()->name : (auth()->guard('client')->user() ?
+    auth()->guard('client')->user()->name : 'Guest')))
 
 @section('content')
     <div class="bg-s text-primary-foreground">
@@ -12,17 +13,15 @@
             <div class="p-6 rounded-lg drop-shadow-xl">
                 <h1 class="text-center text-2xl font-bold">User Profile</h1>
 
-                <h2 class="text-xl font-bold text-center my-2">
-                    {{ auth()->user() ? auth()->user()->name : auth()->guard('client')->user()->name }}</h2>
+                  <h2 class="text-xl font-bold text-center my-2">
+                      {{ auth()->user() ? auth()->user()->name : auth()->guard('client')->user()->name }}</h2>
                 <p class="text-secondary"></p>
 
                 @if (auth()->guard('client')->user() || auth()->user())
                     <div class="">
                         <div class="col-span-3">
                             <div class="flex h-full justify-center items-center">
-                                {{-- @if (
-                                    (auth()->guard('client')->check() && auth()->guard('client')->user()->image) ||
-                                        (auth()->check() && auth()->user()->image))
+                                {{-- @if ((auth()->guard('client')->check() && auth()->guard('client')->user()->image) || (auth()->check() && auth()->user()->image))
                                     <div class="mb-4 col-span-3">
                                         <label for="imageUpload" class="cursor-pointer">
                                             <div
@@ -49,11 +48,12 @@
                                     <div class="mb-4 ml-auto">
                                         <label for="imageUpload" class="cursor-pointer">
                                             <div
-                                                class="relative my-4 w-40 h-40 rounded-full overflow-hidden bg-gray-900 hover:bg-opacity-50">
+                                                class="relative my-4 w-40 h-40 rounded-full overflow-hidden">
                                                 <img class="object-cover w-full h-full"
                                                     src="{{ auth()->user() ? asset('storage/' . auth()->user()->image) : asset('storage/' . auth()->guard('client')->user()->image) }}"
                                                     width="150" height="150" alt="Profile Image" />
                                             </div>
+                                            {{-- <x-bladewind::avatar image="{{ auth()->user() ? asset('storage/' . auth()->user()->image) : asset('storage/' . auth()->guard('client')->user()->image) }}" size="omg" /> --}}
                                         </label>
                                     </div>
                                 @else

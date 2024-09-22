@@ -16,7 +16,7 @@
             Login
         </x-bladewind::button>
 
-        @error('credentials')
+        @error('credentials', 'Error')
             <span class="text-red-500">
                 {{ $message }}
             </span>

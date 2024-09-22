@@ -100,8 +100,8 @@
             <!-- Mobile Menu -->
             <div id="mobile-menu" class="md:hidden absolute top-16 left-0 bg-white w-full hidden">
                 <div class="px-4 py-2">
-                    <a href="/" class="block py-2 px-4 hover:bg-gray-100">Home</a>
-                    <a href="#contact" class="block py-2 px-4 hover:bg-gray-100">Contact Us</a>
+                    <a href="/" class="block py-2 px-4 hover:bg-gray-100 font-semibold">Home</a>
+                    <a href="#contact" class="block py-2 px-4 hover:bg-gray-100 font-semibold ">Contact Us</a>
                     @if (auth()->check() || auth()->guard('client')->check())
                         @php
                             $user = auth()->user();
@@ -110,17 +110,17 @@
 
                         @if ($user)
                             <a href="/lawyer/profile/{{ $user->id }}"
-                                class="block px-4 py-2 hover:bg-gray-100">Profile</a>
-                            <form method="post" class="py-2 hover:bg-gray-100" action="{{ route('lawyer.logout') }}">
+                                class="block px-4 py-2 hover:bg-gray-100 font-semibold">Profile</a>
+                            <form method="post" class="py-2 hover:bg-gray-100 font-semibold" action="{{ route('lawyer.logout') }}">
                                 @csrf
                                 <button class="px-4 py-2">Logout</button>
                             </form>
                         @elseif ($client)
                             <a href="/client/profile/{{ $client->id }}"
-                                class="block px-4 my-2 hover:bg-gray-100">Profile</a>
+                                class="block px-4 my-2 hover:bg-gray-100 font-semibold">Profile</a>
                             <form method="post" class="" action="{{ route('client.logout') }}">
                                 @csrf
-                                <button class="px-4 py-2 hover:bg-gray-100">Logout</button>
+                                <button class="px-4 py-2 hover:bg-gray-100 font-semibold">Logout</button>
                             </form>
                         @else
                             <a href="/client/login" class="hover:text-gray-400 font-semibold">Login</a>
