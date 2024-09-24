@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\ClientController;
 use App\Http\Controllers\Auth\LawyerController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
@@ -19,6 +20,9 @@ Route::group(['prefix' => 'client', 'as' => 'client.'], function () {
     Route::post('/profile/{id}', [ClientController::class, 'edit_profile'])->name('edit_profile');
 
     Route::post('/remove/profile/{id}', [ClientController::class, 'removeProfile'])->name('remove_profile_pic');
+
+    Route::get('/reset/password', [ResetPasswordController::class, 'showPasswordForm'])->name('forgot_password_form');
+    Route::post('/reset/password', [ResetPasswordController::class,'forgetPassword'])->name('forget_password');
 });
     
 Route::get('/', [HomeController::class, 'index'])->name('home');

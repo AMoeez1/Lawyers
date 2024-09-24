@@ -40,9 +40,10 @@ class LawyerController extends Controller
             'degree' => $request->degree,
             'about' => $request->about
         ]);
+
         if ($user) {
             Auth::login($user);
-            return redirect()->route('lawyer.login');
+            return redirect()->route('home', ['user' => $user]);
         }
         return back()->withErrors([
             'register' => "there's something wrong registering account. Make sure to fill all the fields"
@@ -64,9 +65,9 @@ class LawyerController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('CNIC', 'email', 'password');
-        if($credentials){
+        if ($credentials) {
             if (Auth::attempt($credentials)) {
-                return redirect()->route('home');
+                return redirect()->route('home', );
             } else {
                 return back()->withErrors([
                     'credentials' => 'Invalid lawyer credentials',
@@ -96,7 +97,7 @@ class LawyerController extends Controller
     public function show_edit($id)
     {
         $user = User::find($id);
-        if($user && $user->id == $id) {
+        if ($user && $user->id == $id) {
             return view('edit_Profile');
         } else {
             return redirect()->route('home');
