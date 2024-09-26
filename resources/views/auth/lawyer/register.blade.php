@@ -15,12 +15,12 @@
          <select id="countries" name="degree"
              class="bg-gray-50 mb-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
              <option selected>Choose a Degree</option>
-             <option value="LLB">Bachelors of Law (LLB)</option>
-             <option value="JD">Juris Doctor (JD)</option>
-             <option value="LLM">Master Of Laws (LLM)</option>
-             <option value="SJD">Doctor of Juridical Science (SJD)</option>
-             <option value="MDR">Master of Dispute Resolution (MDR)</option>
-             <option value="MLS">Master of Legal Studies (MLS)</option>
+             <option value="Bachelors of Law (LLB)">Bachelors of Law (LLB)</option>
+             <option value="Juris Doctor (JD)">Juris Doctor (JD)</option>
+             <option value="Master Of Laws (LLM)">Master Of Laws (LLM)</option>
+             <option value="Doctor of Juridical Science (SJD)">Doctor of Juridical Science (SJD)</option>
+             <option value="Master of Dispute Resolution (MDR)">Master of Dispute Resolution (MDR)</option>
+             <option value="Master of Legal Studies (MLS)">Master of Legal Studies (MLS)</option>
          </select>
          <x-bladewind::input name="proficiency" required="true" label="Proficiency/Specialist"
              error_message="You will need to enter your proficiency" />

@@ -69,6 +69,9 @@ Route::group(['prefix' => 'lawyer', 'as' => 'lawyer.'], function () {
     Route::get('/profile/edit/{id}', [LawyerController::class, 'show_edit'])->name('show_edit');
     Route::post('/profile/edit/{id}', [LawyerController::class, 'edit_profile'])->name('edit_profile');
     Route::post('/remove/profile/{id}', [LawyerController::class, 'removeProfile'])->name('remove_profile_pic');
+    Route::get('/other/profile/{id}', [LawyerController::class, 'other_profile'])->name('other_profile');
+
+
 
     // Optional Booking Route
     // Route::post('/bookLawyer', [HomeController::class, 'bookLawyer'])->name('booking');

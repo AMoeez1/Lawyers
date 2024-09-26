@@ -95,6 +95,17 @@ class LawyerController extends Controller
         }
     }
 
+    public function other_profile($id){
+        $lawyer = User::find($id);
+        $loggedUser = auth()->user();
+        if($lawyer && !$loggedUser){
+            return view('other_profile', ['user' =>$lawyer]);
+        } elseif($loggedUser){
+            return redirect()->route('lawyer.profile', ['id' => auth()->user()->id]);
+
+        }
+    }
+
     public function show_edit($id)
     {
         $user = User::find($id);

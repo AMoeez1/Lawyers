@@ -157,38 +157,39 @@
 
                                         <x-bladewind::dropmenu-item header="true">
                                             <div class="grow">
-                                                <div><strong>{{$user ? $user->name : $client->name }}</strong></div>
-                                                <div class="text-sm">{{$user ? $user->email : $client->email }}</div>
+                                                <div><strong>{{ $user ? $user->name : $client->name }}</strong></div>
+                                                <div class="text-sm">{{ $user ? $user->email : $client->email }}</div>
                                             </div>
                                         </x-bladewind::dropmenu-item>
 
-                                        <a href="{{$user ? url('/lawyer/profile', $user->id) : url('/client/profile', $client->id) }}">
+                                        <a
+                                            href="{{ $user ? url('/lawyer/profile', $user->id) : url('/client/profile', $client->id) }}">
                                             <x-bladewind::dropmenu-item icon="user" icon_css="">
                                                 Profile
                                             </x-bladewind::dropmenu-item>
                                         </a>
-                                        <a href="{{$user ? url('/lawyer/profile/edit', $user->id) : url('/client/profile/edit', $client->id) }}">
+                                        <a
+                                            href="{{ $user ? url('/lawyer/profile/edit', $user->id) : url('/client/profile/edit', $client->id) }}">
                                             <x-bladewind::dropmenu-item icon="pencil-square">
                                                 Edit Profile
                                             </x-bladewind::dropmenu-item>
                                         </a>
-                                        
+
                                         @if ($user && !$user->img)
-                                        <x-bladewind::dropmenu-item divider />
+                                            <x-bladewind::dropmenu-item divider />
 
-                                        <x-bladewind::dropmenu-item icon="computer-desktop">
-                                            Your Repositories
-                                        </x-bladewind::dropmenu-item>
-                                        <x-bladewind::dropmenu-item icon="briefcase">
-                                            Your Projects
-                                        </x-bladewind::dropmenu-item>
-                                        <x-bladewind::dropmenu-item icon="building-office">
-                                            Your Organizations
-                                        </x-bladewind::dropmenu-item>
-                                        <x-bladewind::dropmenu-item icon="star">
-                                            Your Stars
-                                        </x-bladewind::dropmenu-item>
-
+                                            <x-bladewind::dropmenu-item icon="computer-desktop">
+                                                Your Repositories
+                                            </x-bladewind::dropmenu-item>
+                                            <x-bladewind::dropmenu-item icon="briefcase">
+                                                Your Projects
+                                            </x-bladewind::dropmenu-item>
+                                            <x-bladewind::dropmenu-item icon="building-office">
+                                                Your Organizations
+                                            </x-bladewind::dropmenu-item>
+                                            <x-bladewind::dropmenu-item icon="star">
+                                                Your Stars
+                                            </x-bladewind::dropmenu-item>
                                         @endif
                                         <x-bladewind::dropmenu-item divider />
 

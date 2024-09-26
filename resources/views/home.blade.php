@@ -99,24 +99,27 @@
             <div class="grid grid-cols-12 gap-8">
                 @foreach ($AllUsers as $user)
                     <div class="col-span-12 md:col-span-4 bg-white p-6 rounded-lg shadow-lg text-center cursor-pointer">
-                        @if ($user->image)
-                            <x-bladewind::avatar class="my-4" image="{{ asset('storage/' . $user->image) }}" size="huge" />
-                        @else
-                            <x-bladewind::avatar class="my-4"
-                                image="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
-                                size="huge" />
-                        @endif
+                        <a href="{{route('lawyer.other_profile', ['id' => $user->id])}}">
+                            @if ($user->image)
+                                <x-bladewind::avatar class="my-4" image="{{ asset('storage/' . $user->image) }}" size="huge" />
+                            @else
+                                <x-bladewind::avatar class="my-4"
+                                    image="https://media.istockphoto.com/id/1300845620/vector/user-icon-flat-isolated-on-white-background-user-symbol-vector-illustration.jpg?s=612x612&w=0&k=20&c=yBeyba0hUkh14_jgv1OKqIH0CCSWU_4ckRkAoy2p73o="
+                                    size="huge" />
+                            @endif
+    
+                            <h3 class="text-xl font-semibold mb-2">{{ $user->name }}</h3>
+                            <p class="text-gray-700 mb-4">{{ $user->proficiency }}</p>
+                            <p>"{{ $user->about }}"</p>
+                            {{-- <a href="#book" class="text-blue-500 hover:underline mt-4 block">View Profile</a> --}}
+                            <form method="POST">
+                                @csrf
+                                <a href="#book" id="book"
+                                    class="bg-blue-500 hover:bg-blue-600  text-white font-semibold py-2 px-4 rounded-lg mt-2 inline-block">Book
+                                    a Consultation</a>
+                            </form>
 
-                        <h3 class="text-xl font-semibold mb-2">{{ $user->name }}</h3>
-                        <p class="text-gray-700 mb-4">{{ $user->proficiency }}</p>
-                        <p>"{{ $user->about }}"</p>
-                        {{-- <a href="#book" class="text-blue-500 hover:underline mt-4 block">View Profile</a> --}}
-                        <form method="POST">
-                            @csrf
-                            <a href="#book" id="book"
-                                class="bg-blue-500 hover:bg-blue-600  text-white font-semibold py-2 px-4 rounded-lg mt-2 inline-block">Book
-                                a Consultation</a>
-                        </form>
+                        </a>
                     </div>
                 @endforeach
             </div>
