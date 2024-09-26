@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class LawyerController extends Controller
 {
+
     public function showRegister()
     {
         $user = auth()->user();
@@ -151,7 +152,7 @@ class LawyerController extends Controller
 
         if ($user->image) {
             $rem_img = Storage::disk('public')->delete($user->image);
-            $user->img = null;
+            $user->image = null;
             $user->save();
             if ($rem_img) {
                 return redirect()->route('lawyer.profile', ['id' => $user->id]);

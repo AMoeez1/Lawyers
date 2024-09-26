@@ -38,46 +38,170 @@
                                 @endphp
 
                                 @if ($user && $user->image)
-                                    <x-bladewind::dropmenu
-                                        trigger="<img class='w-10 rounded-full' src='{{ asset('storage/' . $user->image) }}'/>"
-                                        trigger_css="">
-                                        <x-bladewind::dropmenu-item>
-                                            <a href="/lawyer/profile/{{ $user->id }}" class="px-4">Profile</a>
+                                    <x-bladewind::dropmenu>
+                                        <x-slot:trigger>
+                                            <div class="flex space-x-2 items-center rounded-md">
+                                                <div class="grow">
+                                                    <x-bladewind::avatar
+                                                        image="{{ asset('storage/' . $user->image) }}" />
+                                                </div>
+                                                <div>
+                                                    <x-bladewind::icon name="chevron-down" class="!h-4 !w-4" />
+                                                </div>
+                                            </div>
+                                        </x-slot:trigger>
+
+                                        <x-bladewind::dropmenu-item header="true">
+                                            <div class="grow">
+                                                <div><strong>{{ $user->name }}</strong></div>
+                                                <div class="text-sm">{{ $user->email }}</div>
+                                                <div class="text-sm font-semibold">Speciality : {{ $user->proficiency }}
+                                                </div>
+                                            </div>
                                         </x-bladewind::dropmenu-item>
-                                        <x-bladewind::dropmenu-item>
-                                            <form method="post" class="m-0" action="{{ route('lawyer.logout') }}">
-                                                @csrf
-                                                <button class="px-4 my-0">Logout</button>
-                                            </form>
+
+                                        <a href="{{ url('/lawyer/profile', $user->id) }}">
+                                            <x-bladewind::dropmenu-item icon="user" icon_css="">
+                                                Profile
+                                            </x-bladewind::dropmenu-item>
+                                        </a>
+                                        <a href="{{ url('/lawyer/profile/edit', $user->id) }}">
+                                            <x-bladewind::dropmenu-item icon="pencil-square">
+                                                Edit Profile
+                                            </x-bladewind::dropmenu-item>
+                                        </a>
+
+                                        <x-bladewind::dropmenu-item divider />
+
+                                        <x-bladewind::dropmenu-item icon="computer-desktop">
+                                            Your Repositories
                                         </x-bladewind::dropmenu-item>
+                                        <x-bladewind::dropmenu-item icon="briefcase">
+                                            Your Projects
+                                        </x-bladewind::dropmenu-item>
+                                        <x-bladewind::dropmenu-item icon="building-office">
+                                            Your Organizations
+                                        </x-bladewind::dropmenu-item>
+                                        <x-bladewind::dropmenu-item icon="star">
+                                            Your Stars
+                                        </x-bladewind::dropmenu-item>
+
+                                        <x-bladewind::dropmenu-item divider />
+
+                                        <form action="{{ route('lawyer.logout') }}" method="POST">
+                                            @csrf
+                                            <x-bladewind::dropmenu-item hover="false">
+                                                <x-bladewind::button can_submit='true' color="gray" radius="small"
+                                                    size="small" class="w-full">
+                                                    Sign Out
+                                                </x-bladewind::button>
+                                            </x-bladewind::dropmenu-item>
+                                        </form>
                                     </x-bladewind::dropmenu>
                                 @elseif ($client && $client->image)
-                                    <x-bladewind::dropmenu
-                                        trigger="<img class='w-10 rounded-full' src='{{ asset('storage/' . $client->image) }}'/>"
-                                        trigger_css="">
-                                        <x-bladewind::dropmenu-item>
-                                            <a href="/client/profile/{{ $client->id }}" class="px-4">Profile</a>
+                                    <x-bladewind::dropmenu>
+                                        <x-slot:trigger>
+                                            <div class="flex space-x-2 items-center rounded-md">
+                                                <div class="grow">
+                                                    <x-bladewind::avatar
+                                                        image="{{ asset('storage/' . $client->image) }}" />
+                                                </div>
+                                                <div>
+                                                    <x-bladewind::icon name="chevron-down" class="!h-4 !w-4" />
+                                                </div>
+                                            </div>
+                                        </x-slot:trigger>
+
+                                        <x-bladewind::dropmenu-item header="true">
+                                            <div class="grow">
+                                                <div><strong>{{ $client->name }}</strong></div>
+                                                <div class="text-sm">{{ $client->email }}</div>
+                                            </div>
                                         </x-bladewind::dropmenu-item>
-                                        <x-bladewind::dropmenu-item>
-                                            <form method="post" class="m-0" action="{{ route('client.logout') }}">
-                                                @csrf
-                                                <button class="px-4 my-0">Logout</button>
-                                            </form>
-                                        </x-bladewind::dropmenu-item>
+
+                                        <a href="{{ url('/client/profile', $client->id) }}">
+                                            <x-bladewind::dropmenu-item icon="user" icon_css="">
+                                                Profile
+                                            </x-bladewind::dropmenu-item>
+                                        </a>
+                                        <a href="{{ url('/client/profile/edit', $client->id) }}">
+                                            <x-bladewind::dropmenu-item icon="pencil-square">
+                                                Edit Profile
+                                            </x-bladewind::dropmenu-item>
+                                        </a>
+
+                                        <x-bladewind::dropmenu-item divider />
+
+                                        <form action="{{ route('client.logout') }}" method="POST">
+                                            @csrf
+                                            <x-bladewind::dropmenu-item hover="false">
+                                                <x-bladewind::button can_submit='true' color="gray" radius="small"
+                                                    size="small" class="w-full">
+                                                    Sign Out
+                                                </x-bladewind::button>
+                                            </x-bladewind::dropmenu-item>
+                                        </form>
                                     </x-bladewind::dropmenu>
                                 @else
-                                    <x-bladewind::dropmenu trigger="<i class='fas fa-user'></i>" trigger_css="">
-                                        <x-bladewind::dropmenu-item>
-                                            <a href="/client/profile/{{ $client->id ?? $user->id }}"
-                                                class="px-4">Profile</a>
+                                    <x-bladewind::dropmenu>
+                                        <x-slot:trigger>
+                                            <div class="flex space-x-2 items-center rounded-md">
+                                                <div class="grow">
+                                                    <x-bladewind::avatar image="{{ asset('storage/user.png') }}" />
+                                                </div>
+                                                <div>
+                                                    <x-bladewind::icon name="chevron-down" class="!h-4 !w-4" />
+                                                </div>
+                                            </div>
+                                        </x-slot:trigger>
+
+                                        <x-bladewind::dropmenu-item header="true">
+                                            <div class="grow">
+                                                <div><strong>{{$user ? $user->name : $client->name }}</strong></div>
+                                                <div class="text-sm">{{$user ? $user->email : $client->email }}</div>
+                                            </div>
                                         </x-bladewind::dropmenu-item>
-                                        <x-bladewind::dropmenu-item>
-                                            <form method="post" class="m-0"
-                                                action="{{ $client ? route('client.logout') : route('lawyer.logout') }}">
-                                                @csrf
-                                                <button class="px-4 my-0">Logout</button>
-                                            </form>
+
+                                        <a href="{{$user ? url('/lawyer/profile', $user->id) : url('/client/profile', $client->id) }}">
+                                            <x-bladewind::dropmenu-item icon="user" icon_css="">
+                                                Profile
+                                            </x-bladewind::dropmenu-item>
+                                        </a>
+                                        <a href="{{$user ? url('/lawyer/profile/edit', $user->id) : url('/client/profile/edit', $client->id) }}">
+                                            <x-bladewind::dropmenu-item icon="pencil-square">
+                                                Edit Profile
+                                            </x-bladewind::dropmenu-item>
+                                        </a>
+                                        
+                                        @if ($user && !$user->img)
+                                        <x-bladewind::dropmenu-item divider />
+
+                                        <x-bladewind::dropmenu-item icon="computer-desktop">
+                                            Your Repositories
                                         </x-bladewind::dropmenu-item>
+                                        <x-bladewind::dropmenu-item icon="briefcase">
+                                            Your Projects
+                                        </x-bladewind::dropmenu-item>
+                                        <x-bladewind::dropmenu-item icon="building-office">
+                                            Your Organizations
+                                        </x-bladewind::dropmenu-item>
+                                        <x-bladewind::dropmenu-item icon="star">
+                                            Your Stars
+                                        </x-bladewind::dropmenu-item>
+
+                                        @endif
+                                        <x-bladewind::dropmenu-item divider />
+
+                                        <form action="{{ $client ? route('client.logout') : route('lawyer.logout') }}"
+                                            method="POST">
+                                            @csrf
+                                            <x-bladewind::dropmenu-item hover="false">
+                                                <x-bladewind::button can_submit='true' color="gray" radius="small"
+                                                    size="small" class="w-full">
+                                                    Sign Out
+                                                </x-bladewind::button>
+                                            </x-bladewind::dropmenu-item>
+                                        </form>
                                     </x-bladewind::dropmenu>
                                 @endif
                             </div>
@@ -111,7 +235,8 @@
                         @if ($user)
                             <a href="/lawyer/profile/{{ $user->id }}"
                                 class="block px-4 py-2 hover:bg-gray-100 font-semibold">Profile</a>
-                            <form method="post" class="py-2 hover:bg-gray-100 font-semibold" action="{{ route('lawyer.logout') }}">
+                            <form method="post" class="py-2 hover:bg-gray-100 font-semibold"
+                                action="{{ route('lawyer.logout') }}">
                                 @csrf
                                 <button class="px-4 py-2">Logout</button>
                             </form>

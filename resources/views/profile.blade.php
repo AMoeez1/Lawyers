@@ -11,10 +11,6 @@
         </header>
         <div class="container mx-auto mt-8 h-full">
             <div class="p-6 rounded-lg drop-shadow-xl">
-                <h1 class="text-center text-2xl font-bold">User Profile</h1>
-
-                  <h2 class="text-xl font-bold text-center my-2">
-                      {{ auth()->user() ? auth()->user()->name : auth()->guard('client')->user()->name }}</h2>
                 <p class="text-secondary"></p>
 
                 @if (auth()->guard('client')->user() || auth()->user())
@@ -41,14 +37,17 @@
                             </div>
                         </div>
                         <div class=" bg-white py-4 px-10">
+                            <h1 class="text-center text-2xl font-bold">User Profile</h1>
+
+                            <h2 class="text-xl font-bold text-center my-2">
+                                {{ auth()->user() ? auth()->user()->name : auth()->guard('client')->user()->name }}</h2>
                             <div class="flex">
                                 @if (
                                     (auth()->guard('client')->check() && auth()->guard('client')->user()->image) ||
                                         (auth()->check() && auth()->user()->image))
                                     <div class="mb-4 ml-auto">
                                         <label for="imageUpload" class="cursor-pointer">
-                                            <div
-                                                class="relative my-4 w-40 h-40 rounded-full overflow-hidden">
+                                            <div class="relative my-4 w-40 h-40 rounded-full overflow-hidden">
                                                 <img class="object-cover w-full h-full"
                                                     src="{{ auth()->user() ? asset('storage/' . auth()->user()->image) : asset('storage/' . auth()->guard('client')->user()->image) }}"
                                                     width="150" height="150" alt="Profile Image" />
@@ -70,7 +69,7 @@
                                 </div>
                             </div>
                             @if (auth()->user())
-                                <p>Full Name</p>
+                                {{-- <p>Full Name</p>
                                 <h3 class="text-xl font-semibold mb-3">{{ auth()->user()->name }}</h3>
                                 <p>Email</p>
                                 <h3 class="text-xl font-semibold mb-3">{{ auth()->user()->email }}</h3>
@@ -81,7 +80,23 @@
                                 <p>CNIC</p>
                                 <h3 class="text-xl font-semibold mb-3">{{ auth()->user()->CNIC }}</h3>
                                 <p>About</p>
-                                <h3 class="font-semibold mb-3">{{ auth()->user()->about }}</h3>
+                                <h3 class="font-semibold mb-3">{{ auth()->user()->about }}</h3> --}}
+                                <x-bladewind::table divided="false">
+                                    <x-slot name="header">
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Degree</th>
+                                        <th>Proficiency</th>
+                                        <th>CNIC</th>
+                                        <th>About</th>
+                                    </x-slot>
+                                    <td>{{ auth()->user()->name }}</td>
+                                    <td>{{ auth()->user()->email }}</td>
+                                    <td>{{ auth()->user()->degree }}</td>
+                                    <td>{{ auth()->user()->proficiency }}</td>
+                                    <td>{{ auth()->user()->CNIC }}</td>
+                                    <td>{{ auth()->user()->about }}</td>
+                                </x-bladewind::table>
                             @else
                                 <p>Full Name</p>
                                 <h3 class="text-xl font-semibold mb-3">{{ auth()->guard('client')->user()->name }}</h3>
@@ -95,6 +110,7 @@
                                 <h3 class="text-xl font-semibold mb-3">
                                     {{ auth()->guard('client')->user()->gender ?? 'Not Added' }}</h3>
                             @endif
+                            <h1 class="text-3xl text-center py-8">Cases Done</h1>
                         </div>
                     </div>
                 @endif

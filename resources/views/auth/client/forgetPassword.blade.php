@@ -15,7 +15,7 @@
         <x-bladewind::input name="email" required="true" label="Email Address"
             error_message="You will need to enter your Email" />
         <p class="text-red-600 text-sm mx-1 mb-8">Email must be valid to reset your password!</p>
-        @error('credentials')
+        @error('Error', 'message')
             <span class="text-red-500">
                 {{ $message }}
             </span>

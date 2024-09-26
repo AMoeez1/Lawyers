@@ -2,6 +2,12 @@
 
 @section('title', 'Login - Lawyer')
 
+<style>
+    .w-full.bw-alert.animate__animated.animate__fadeIn.rounded-md.flex.p-3.bg-red-200\/80.text-red-600.mb-4 {
+    padding: 8px;
+}
+</style>
+
 @section('content')
     <form method="POST" action="{{ route('lawyer.login') }}"
         class="bg-card bg-white p-8 rounded-lg shadow-lg w-full max-w-md">
@@ -17,9 +23,9 @@
         </x-bladewind::button>
 
         @error('credentials', 'Error')
-            <span class="text-red-500">
+            <x-bladewind::alert class="mb-4" size='small' type="error">
                 {{ $message }}
-            </span>
+            </x-bladewind::alert>
         @enderror
 
 
