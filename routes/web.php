@@ -59,10 +59,11 @@ Route::group(['prefix' => 'lawyer', 'as' => 'lawyer.'], function () {
     Route::post('register', [LawyerController::class, 'register'])->name('register');
 
     // Email Verification Routes
-    Route::get('email/verify/{id}/{hash}', [LawyerController::class, 'verify'])->name('verify')->middleware(['signed']);
-    Route::get('email/verify', function () {
-        return view('auth.verify');
-    })->name('verification.notice');
+    // Route::get('email/verify/{id}/{hash}', [LawyerController::class, 'verify'])->name('verify')->middleware(['signed']);
+    // Route::get('email/verify', function () {
+    //     return view('auth.verify');
+    // })->name('verification.notice');
+    Route::post('verify/email', [LawyerController::class, 'emailVerify'])->name('verify_email');
 
     // Profile Routes
     Route::get('/profile/{id}', [LawyerController::class, 'profile'])->name('profile');

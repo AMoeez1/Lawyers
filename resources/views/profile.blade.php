@@ -38,9 +38,33 @@
                         </div>
                         <div class=" bg-white py-4 px-10">
                             <h1 class="text-center text-2xl font-bold">User Profile</h1>
+                            <div class="flex justify-center gap-2">
 
-                            <h2 class="text-xl font-bold text-center my-2">
-                                {{ auth()->user() ? auth()->user()->name : auth()->guard('client')->user()->name }}</h2>
+                                <h2 class="text-xl font-bold text-center my-2">
+                                    {{ auth()->user() ? auth()->user()->name : auth()->guard('client')->user()->name }}</h2>
+                                @if (auth()->user())
+                                    <button class="" onclick="showModal('noblur')">
+                                        <div class="bg-red-500 py-1 px-3 rounded-lg shadow-lg">
+                                            <i class="fas fa-exclamation text-white" style="font-size: 14px;"></i>
+
+                                        </div>
+                                    </button>
+
+                                    <x-bladewind::modal title="Email Verification" show_action_buttons="false" blur_size="none" name="noblur">
+                                        <hr>
+                                        <form action="{{ route('lawyer.verify_email') }}" method="POST" class="">
+                                            @csrf
+                                            <p class="my-4">You have not verified your email yet. <br>We will send verification link in your authenticated email. <br> it can take upto 10 minutes. Be patient! </p>
+                                            {{-- <hr> --}}
+                                            <div class="flex justify-end mt-2">
+                                                <x-bladewind::button>
+                                                    Send Verification Code
+                                                </x-bladewind::button>
+                                            </div>
+                                        </form>
+                                    </x-bladewind::modal>
+                                @endif
+                            </div>
                             <div class="flex">
                                 @if (
                                     (auth()->guard('client')->check() && auth()->guard('client')->user()->image) ||
@@ -81,6 +105,7 @@
                                 <h3 class="text-xl font-semibold mb-3">{{ auth()->user()->CNIC }}</h3>
                                 <p>About</p>
                                 <h3 class="font-semibold mb-3">{{ auth()->user()->about }}</h3> --}}
+
                                 <x-bladewind::table divided="false">
                                     <x-slot name="header">
                                         <th>Name</th>

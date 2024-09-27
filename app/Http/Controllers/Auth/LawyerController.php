@@ -1,9 +1,11 @@
 <?php
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
+use App\Mail\LawyersEmail;
 use App\Models\User;
 use Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class LawyerController extends Controller
@@ -98,11 +100,10 @@ class LawyerController extends Controller
     public function other_profile($id){
         $lawyer = User::find($id);
         $loggedUser = auth()->user();
-        if($lawyer && !$loggedUser){
-            return view('other_profile', ['user' =>$lawyer]);
-        } elseif($loggedUser){
+        if($loggedUser && $loggedUser->id == $lawyer->id){
             return redirect()->route('lawyer.profile', ['id' => auth()->user()->id]);
-
+        } else{
+            return view('other_profile', ['user' =>$lawyer]);
         }
     }
 
@@ -170,6 +171,18 @@ class LawyerController extends Controller
             } else {
                 return back()->withErrors(['Error' => 'Error Removing Image']);
             }
+        }
+    }
+
+    public function emailVerify(){
+        $message = 'Hello';
+        $subject = 'Lawyers Connect';
+        $toUser = auth()->user()->email;
+        $mail = Mail::to($toUser)->send(new LawyersEmail($message, $subject));
+        if($mail) {
+            return redirect()->route('lawyer.profile', ['id' => auth()->user()->id]);
+        } else {
+            return back()->withErrors(['Error' => 'Error Sending Mail']);
         }
     }
 }
