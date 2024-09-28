@@ -55,11 +55,11 @@
                                             <div class="grow">
                                                 <div class="flex gap-1">
                                                     <strong>{{ $user->name }}</strong>
-                                                        @if ($user->email_verified_at !== null)
-                                                            <div class=" items-center cursor-pointer">
-                                                                <i class="fas fa-check-circle text-blue-500 text-sm"></i>
-                                                            </div>
-                                                        @endif
+                                                    @if ($user->email_verified_at !== null)
+                                                        <div class=" items-center cursor-pointer">
+                                                            <i class="fas fa-check-circle text-blue-500 text-sm"></i>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 <div class="text-sm">{{ $user->email }}</div>
                                                 <div class="text-sm font-semibold">Speciality : {{ $user->proficiency }}
@@ -77,6 +77,13 @@
                                                 Edit Profile
                                             </x-bladewind::dropmenu-item>
                                         </a>
+                                        @if ($user->email_verified_at == null)
+                                            <x-bladewind::dropmenu-item icon_css="!text-red-300">
+                                                <i
+                                                    class="fas fa-exclamation text-red-500 flex items-center justify-center ml-1"></i>
+                                                <span class="text-red-500 ml-3">Not Verified</span>
+                                            </x-bladewind::dropmenu-item>
+                                        @endif
 
                                         <x-bladewind::dropmenu-item divider />
 

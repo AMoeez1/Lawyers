@@ -15,27 +15,6 @@
 
                 @if (auth()->guard('client')->user() || auth()->user())
                     <div class="">
-                        <div class="col-span-3">
-                            <div class="flex h-full justify-center items-center">
-                                {{-- @if ((auth()->guard('client')->check() && auth()->guard('client')->user()->image) || (auth()->check() && auth()->user()->image))
-                                    <div class="mb-4 col-span-3">
-                                        <label for="imageUpload" class="cursor-pointer">
-                                            <div
-                                                class="relative w-60 h-60 rounded-full overflow-hidden bg-gray-900 hover:bg-opacity-50">
-                                                <img class="object-cover w-full h-full"
-                                                    src="{{ auth()->user() ? asset('storage/' . auth()->user()->image) : asset('storage/' . auth()->guard('client')->user()->image) }}"
-                                                    width="150" height="150" alt="Profile Image" />
-                                            </div>
-                                        </label>
-                                    </div>
-                                @else
-                                    <div class="mb-4 col-span-3">
-                                        <img class="object-cover w-40" src="{{ asset('storage/user.png') }}"
-                                            alt="Profile Image" />
-                                    </div>
-                                @endif --}}
-                            </div>
-                        </div>
                         <div class=" bg-white py-4 px-10">
                             <h1 class="text-center text-2xl font-bold">User Profile</h1>
                             <div class="flex justify-center gap-2">
@@ -57,7 +36,6 @@
                                             <p class="my-4">You have not verified your email yet. <br>We will send
                                                 verification link in your authenticated email. <br> it can take upto 10
                                                 minutes. Be patient! </p>
-                                            {{-- <hr> --}}
                                             <div class="flex justify-end mt-2">
                                                 <x-bladewind::button can_submit='true'>
                                                     Send Verification Code
