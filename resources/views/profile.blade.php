@@ -42,29 +42,42 @@
 
                                 <h2 class="text-xl font-bold text-center my-2">
                                     {{ auth()->user() ? auth()->user()->name : auth()->guard('client')->user()->name }}</h2>
-                                @if (auth()->user())
+                                @if (auth()->user()->email_verified_at == null)
                                     <button class="" onclick="showModal('noblur')">
                                         <div class="bg-red-500 py-1 px-3 rounded-lg shadow-lg">
                                             <i class="fas fa-exclamation text-white" style="font-size: 14px;"></i>
 
                                         </div>
                                     </button>
-
-                                    <x-bladewind::modal title="Email Verification" show_action_buttons="false" blur_size="none" name="noblur">
+                                    <x-bladewind::modal title="Email Verification" cancel_button_label="Verify Later"
+                                        ok_button_label="" blur_size="none" name="noblur">
                                         <hr>
-                                        <form action="{{ route('lawyer.verify_email') }}" method="POST" class="">
+                                        <form action="{{ route('lawyer.send_email') }}" method="POST" class="">
                                             @csrf
-                                            <p class="my-4">You have not verified your email yet. <br>We will send verification link in your authenticated email. <br> it can take upto 10 minutes. Be patient! </p>
+                                            <p class="my-4">You have not verified your email yet. <br>We will send
+                                                verification link in your authenticated email. <br> it can take upto 10
+                                                minutes. Be patient! </p>
                                             {{-- <hr> --}}
                                             <div class="flex justify-end mt-2">
-                                                <x-bladewind::button>
+                                                <x-bladewind::button can_submit='true'>
                                                     Send Verification Code
                                                 </x-bladewind::button>
                                             </div>
                                         </form>
                                     </x-bladewind::modal>
+                                    @else 
+                                    <div class="flex items-center cursor-pointer">
+                                        <i class="fas fa-check-circle text-blue-500 text-xl"></i>
+                                    </div>
                                 @endif
                             </div>
+                            @if (session('response'))
+                                <div class="block m-auto" style="width: 50%">
+                                        <x-bladewind::alert type="success">
+                                            {{ session('response') }}
+                                        </x-bladewind::alert>
+                                </div>
+                            @endif
                             <div class="flex">
                                 @if (
                                     (auth()->guard('client')->check() && auth()->guard('client')->user()->image) ||

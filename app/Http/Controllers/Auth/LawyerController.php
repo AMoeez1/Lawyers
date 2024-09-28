@@ -174,15 +174,28 @@ class LawyerController extends Controller
         }
     }
 
-    public function emailVerify(){
+    public function sendEmail(){
         $message = 'Hello';
         $subject = 'Lawyers Connect';
         $toUser = auth()->user()->email;
+
         $mail = Mail::to($toUser)->send(new LawyersEmail($message, $subject));
         if($mail) {
-            return redirect()->route('lawyer.profile', ['id' => auth()->user()->id]);
+            return redirect()->route('lawyer.profile', ['id' => auth()->user()->id])->with('response', 'Verification link sent');
         } else {
             return back()->withErrors(['Error' => 'Error Sending Mail']);
+        }
+    }
+
+    public function verifyEmail(){
+        $user = auth()->user();
+        
+        if($user) {
+            $user->email_verified_at = now();
+            $user->save();
+            return redirect()->route('lawyer.profile', ['id'=> $user->id])->with('response', 'You are now Verified');
+        } else {    
+            return back()->withErrors(['Error' => 'Something Went Wrong Verifying']);
         }
     }
 }

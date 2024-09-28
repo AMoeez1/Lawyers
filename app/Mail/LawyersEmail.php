@@ -13,7 +13,7 @@ class LawyersEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $message;
+    public $messageContent;
     public $subject;
 
     /**
@@ -21,7 +21,7 @@ class LawyersEmail extends Mailable
      */
     public function __construct($messageContent, $subject)
     {
-        $this->message = $messageContent;
+        $this->messageContent = $messageContent;
         $this->subject = $subject;
     }
 
@@ -38,20 +38,20 @@ class LawyersEmail extends Mailable
     /**
      * Get the message content definition.
      */
-    // public function content(): Content
-    // {
-    //     return new Content(
-    //         view: 'mail.welcome', 
-    //     );
-    // }
-    public function build()
+    public function content(): Content
     {
-        return $this->view('mail.welcome')
-            ->with([
-                'message' => $this->message,
-                'subject' => $this->subject,
-            ]);
+        return new Content(
+            view: 'mail.welcome', 
+        );
     }
+    // public function build()
+    // {
+    //     return $this->view('mail.welcome')
+    //         ->with([
+    //             'message' => $this->message,
+    //             'subject' => $this->subject,
+    //         ]);
+    // }
     /**
      * Get the attachments for the message.
      *

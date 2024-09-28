@@ -53,7 +53,14 @@
 
                                         <x-bladewind::dropmenu-item header="true">
                                             <div class="grow">
-                                                <div><strong>{{ $user->name }}</strong></div>
+                                                <div class="flex gap-1">
+                                                    <strong>{{ $user->name }}</strong>
+                                                        @if ($user->email_verified_at !== null)
+                                                            <div class=" items-center cursor-pointer">
+                                                                <i class="fas fa-check-circle text-blue-500 text-sm"></i>
+                                                            </div>
+                                                        @endif
+                                                </div>
                                                 <div class="text-sm">{{ $user->email }}</div>
                                                 <div class="text-sm font-semibold">Speciality : {{ $user->proficiency }}
                                                 </div>
